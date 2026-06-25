@@ -1,0 +1,4 @@
+interface:
+  display_name: "Azure CLI"
+  short_description: "Choose and run core az or Azure DevOps extension commands"
+  default_prompt: "Use $azure-cli to decide whether this task belongs to core Azure CLI or the Azure DevOps extension, then configure auth and run the right commands."

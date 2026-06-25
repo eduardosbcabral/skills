@@ -1,0 +1,7 @@
+interface:
+  display_name: "Coolify CLI"
+  short_description: "Operate Coolify from the terminal"
+  default_prompt: "Use $coolify-cli to inspect my Coolify resources and deploy safely from the CLI."
+
+policy:
+  allow_implicit_invocation: true
