@@ -1,0 +1,4 @@
+interface:
+  display_name: "Idea to Build Loop"
+  short_description: "Turn an idea or doc into a build path"
+  default_prompt: "Use $loop-idea-to-build to turn this rough idea or customer document into an executable build path."

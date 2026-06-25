@@ -20,7 +20,7 @@ At start, check whether companion skills are available in the session. If a step
 
 1. Restate the rule as actor, trigger, condition, expected outcome, rejected outcome, and edge cases.
 2. Classify: tiny, normal, or large/risky. Use `references/loop-control.md` for non-tiny work, extended loops, automation, subagents, recurring work, or hands-off execution.
-3. Use `$grill-with-docs` only when direction, domain terms, acceptance examples, or risky decisions are unclear enough that implementation would encode guesses.
+3. Run the solution discussion gate before implementing normal/risky changes: use `$grill-with-docs` to challenge direction, domain terms, acceptance examples, risky decisions, and solution shape. For tiny rules, skip this gate unless ambiguity or risk would make the loop encode guesses.
 4. In a codebase, read local guidance before editing: `AGENTS.md`, README, docs, architecture notes, scripts, test conventions, and nearby implementations.
 5. Load only needed references: `harness-contract.md` for sensors/verification, `rule-ledger.md` for normal/risky rules, `loop-prompts.md` for prompts/review gates, and `self-review.md` before final completion.
 

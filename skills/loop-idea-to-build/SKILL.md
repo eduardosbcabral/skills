@@ -1,11 +1,11 @@
 ---
-name: loop-idea-to-program
-description: "Use when the user has a rough product idea, customer PDF/spec, meeting notes, large epic, or non-technical business request and wants to turn it into an executable software program of work: domain model, business rules, architecture boundaries, vertical slices, unknowns, harness sensors, and a first implementation goal. Do not use for a small already-specified code change or for a direct bug symptom."
+name: loop-idea-to-build
+description: "Use when the user has a rough product idea, customer PDF/spec, meeting notes, large epic, or non-technical business request and wants to turn it into an executable build path: domain model, business rules, architecture boundaries, vertical slices, unknowns, harness sensors, and a first implementation goal. Do not use for a small already-specified code change or for a direct bug symptom."
 ---
 
-# Idea To Program Loop
+# Idea To Build Loop
 
-Turn rough intent into a controlled program of work: source facts, domain rules, vertical slices, evidence, and a first build goal.
+Turn rough intent into a controlled build path: source facts, domain rules, vertical slices, evidence, and a first build goal.
 
 ## Companion Skills
 
@@ -20,7 +20,7 @@ At start, check whether companion skills are available in the session. If a step
 
 1. Identify the input: idea, customer PDF/spec, notes, product gap, epic, or non-technical business request.
 2. Classify: tiny, normal, or large/risky. Use `references/loop-control.md` for normal/large work, extended loops, automation, subagents, recurring work, or hands-off execution.
-3. Use `$grill-with-docs` only when product direction, domain language, source facts, business decisions, or acceptance evidence are unclear enough that the loop would encode guesses.
+3. Run the solution discussion gate before planning normal/large/risky work: use `$grill-with-docs` to challenge product direction, domain language, source facts, business decisions, acceptance evidence, and the first build shape. For tiny work, skip this gate unless ambiguity or risk would make the loop encode guesses.
 4. If targeting a codebase, read local guidance before planning: `AGENTS.md`, README, docs, architecture notes, scripts, test conventions, and existing flows.
 5. Load only needed references: `harness-contract.md` for sensors, `program-brief.md` for normal/large work, `loop-prompts.md` for prompts/review gates, and `self-review.md` before final completion.
 

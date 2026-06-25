@@ -18,7 +18,7 @@ This repository is intended to stay public. Keep personal paths, private hostnam
 - `loop-broken-to-fixed`
 - `codex-report-usage`
 - `coolify-cli`
-- `loop-idea-to-program`
+- `loop-idea-to-build`
 - `my-vault`
 - `loop-rule-to-done`
 - `saas-backend-patterns`

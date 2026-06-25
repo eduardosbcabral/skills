@@ -20,7 +20,7 @@ At start, check whether companion skills are available in the session. If a step
 
 1. Capture the exact symptom: error text, stack trace, failing check, URL/action, timestamp, environment, impact, and expected behavior.
 2. Classify: tiny, normal, or large/risky. Use `references/loop-control.md` for non-tiny work, extended loops, automation, subagents, recurring work, or hands-off execution.
-3. Use `$grill-with-docs` only when expected behavior, impact, ownership, reproduction boundary, or risky fix direction is unclear enough that the loop would encode guesses.
+3. Schedule the solution discussion gate: reproduce or bound the failure first, then use `$grill-with-docs` before implementation when the fix changes expected behavior, contracts, data, permissions, UX, core rules, or risky direction. For tiny cause-specific fixes with clear expected behavior, skip this gate unless ambiguity or risk would make the loop encode guesses.
 4. In a codebase, read local guidance before diagnosis: `AGENTS.md`, README, docs, runbooks, architecture notes, scripts, test conventions, and nearby implementations.
 5. Load only needed references: `harness-contract.md` for sensors, `diagnosis-ledger.md` for non-tiny/competing hypotheses, `loop-prompts.md` for prompts/review gates, and `self-review.md` before final completion.
 
