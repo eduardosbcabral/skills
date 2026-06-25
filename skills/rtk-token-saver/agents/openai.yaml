@@ -1,0 +1,4 @@
+interface:
+  display_name: "RTK Token Saver"
+  short_description: "Compact noisy CLI output with RTK"
+  default_prompt: "Use $rtk-token-saver to reduce token usage from noisy command output while preserving verification quality."

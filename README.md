@@ -84,6 +84,7 @@ This repository is intended to stay public. Keep personal paths, private hostnam
 - `loop-idea-to-build`
 - `my-vault`
 - `loop-change-to-done`
+- `rtk-token-saver`
 - `saas-backend-patterns`
 - `saas-frontend-patterns`
 - `saas-project-bootstrap`
@@ -93,3 +94,7 @@ This repository is intended to stay public. Keep personal paths, private hostnam
 Some loop skills can use optional companion skills when they are installed locally. These are referenced by name but are not bundled here.
 
 - `$grill-with-docs`: external third-party companion for grilling unclear requirements and capturing glossary/ADR decisions.
+
+## Optional External Tools
+
+- `rtk-token-saver` can use the external RTK CLI from `rtk-ai/rtk` when it is installed. The skill falls back to normal commands when RTK is unavailable or when exact raw output is needed.

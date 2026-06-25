@@ -12,6 +12,7 @@ Turn one desired change into the smallest correct, verified result. Most small c
 At start, check whether companion skills are available in the session. If a step would use a missing companion, say `missing companion skill: $name; using inline fallback` once and continue. Treat missing companions as blocking only when no inline/tool fallback can satisfy the step.
 
 - Simplicity: `$ponytail`, `$ponytail-review`.
+- Token efficiency: `$rtk-token-saver` (optional; compact noisy shell output when RTK is installed and exact raw output is not required).
 - Direction/domain: `$grill-with-docs` (external companion), `$domain-modeling`, `$prototype`.
 - Delivery/sensors: `$github:gh-fix-ci`, relevant security skills.
 - Planning outputs: `$to-issues`, `$handoff` only when tickets or resumable handoff are actually needed.
@@ -29,18 +30,19 @@ At start, check whether companion skills are available in the session. If a step
 1. Inspect current behavior and nearby patterns.
 2. Convert the change into acceptance examples, including negative/edge examples when useful.
 3. Record mode, state, objective verifier, hard stop, sensors, and human approval gates.
-4. Apply the embedded Ponytail gate before coding: reuse existing code, stdlib, native platform, or installed dependency before new code; write the fewest files that satisfy the change. Never cut explicit business rules, trust-boundary validation, security, accessibility, data-loss handling, or required checks.
-5. Implement the smallest scoped change at the narrowest correct point.
-6. Self-review against the requested change, acceptance examples, scope, edge cases, and project conventions.
-7. Verify with the tightest evidence: focused test, typecheck, lint, build, CLI, browser/API check, or CI.
-8. Run the build/lint gate for app code when available; record unavailable/too-costly gates and nearest proxy.
-9. Run the simplicity review gate: use `$ponytail-review` when available, otherwise inline-check for unnecessary dependency, abstraction, wrapper, dead flexibility, stdlib/native miss, or larger-than-needed diff.
-10. Run the correctness review gate: use `loop-rule-reviewer` for normal/risky code or behavior changes; inline fallback only after recording subagent discovery/fallback evidence.
-11. Fix blocking review findings, then rerun affected verification and build/lint gates.
-12. Ask before opening a PR unless already requested. After push/PR, monitor CI/CD when local pipeline coverage was incomplete and CI/CD exists, or record that CI/CD is unavailable/delegated.
-13. Update persistent state only for automated, recurring, multi-thread, or resumable loops.
-14. Capture durable rule/change knowledge only when business-significant.
-15. End with decision: done, continue, ask, escalate, or stop; include verifier, build/lint, simplicity review, correctness review, PR/CI status, state update, and residual risk.
+4. Use `$rtk-token-saver` for noisy repo inspection, tests, lint, build, CI, or logs when available; use raw output when exact diagnostics or full detail matters.
+5. Apply the embedded Ponytail gate before coding: reuse existing code, stdlib, native platform, or installed dependency before new code; write the fewest files that satisfy the change. Never cut explicit business rules, trust-boundary validation, security, accessibility, data-loss handling, or required checks.
+6. Implement the smallest scoped change at the narrowest correct point.
+7. Self-review against the requested change, acceptance examples, scope, edge cases, and project conventions.
+8. Verify with the tightest evidence: focused test, typecheck, lint, build, CLI, browser/API check, or CI.
+9. Run the build/lint gate for app code when available; record unavailable/too-costly gates and nearest proxy.
+10. Run the simplicity review gate: use `$ponytail-review` when available, otherwise inline-check for unnecessary dependency, abstraction, wrapper, dead flexibility, stdlib/native miss, or larger-than-needed diff.
+11. Run the correctness review gate: use `loop-rule-reviewer` for normal/risky code or behavior changes; inline fallback only after recording subagent discovery/fallback evidence.
+12. Fix blocking review findings, then rerun affected verification and build/lint gates.
+13. Ask before opening a PR unless already requested. After push/PR, monitor CI/CD when local pipeline coverage was incomplete and CI/CD exists, or record that CI/CD is unavailable/delegated.
+14. Update persistent state only for automated, recurring, multi-thread, or resumable loops.
+15. Capture durable rule/change knowledge only when business-significant.
+16. End with decision: done, continue, ask, escalate, or stop; include verifier, build/lint, simplicity review, correctness review, PR/CI status, state update, and residual risk.
 
 ## Subagents
 
