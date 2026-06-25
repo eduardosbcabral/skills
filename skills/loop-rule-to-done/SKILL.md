@@ -1,5 +1,5 @@
 ---
-name: rule-to-done-loop
+name: loop-rule-to-done
 description: "Use when the user gives a business rule, feature rule, validation rule, permission rule, UI behavior, or small/medium desired change and wants it implemented with acceptance examples, focused verification, and durable rule capture when needed. Do not use for vague product discovery or for bug reports centered on an exception, failing CI check, or broken runtime symptom."
 ---
 

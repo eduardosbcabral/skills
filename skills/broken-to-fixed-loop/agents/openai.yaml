@@ -1,4 +1,0 @@
-interface:
-  display_name: "Broken to Fixed Loop"
-  short_description: "Diagnose a symptom, fix it, and verify"
-  default_prompt: "Use $broken-to-fixed-loop to diagnose this failure, gather available sensors, implement the smallest fix, and verify it."

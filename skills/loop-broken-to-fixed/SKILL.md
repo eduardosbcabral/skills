@@ -1,5 +1,5 @@
 ---
-name: broken-to-fixed-loop
+name: loop-broken-to-fixed
 description: "Use when the user reports an exception, stack trace, failed CI check, broken behavior, browser failure, production error, performance regression, or other symptom and wants a diagnosis-to-fix loop with reproduction, sensor collection, smallest safe fix, and regression evidence. Do not use for vague product discovery or for a fully specified feature rule with no failure symptom."
 ---
 

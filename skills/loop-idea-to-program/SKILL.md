@@ -1,5 +1,5 @@
 ---
-name: idea-to-program-loop
+name: loop-idea-to-program
 description: "Use when the user has a rough product idea, customer PDF/spec, meeting notes, large epic, or non-technical business request and wants to turn it into an executable software program of work: domain model, business rules, architecture boundaries, vertical slices, unknowns, harness sensors, and a first implementation goal. Do not use for a small already-specified code change or for a direct bug symptom."
 ---
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Idea to Program Loop"
+  short_description: "Turn an idea or doc into a build program"
+  default_prompt: "Use $loop-idea-to-program to turn this rough idea or customer document into an executable software program of work."

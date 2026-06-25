@@ -15,12 +15,12 @@ This repository is intended to stay public. Keep personal paths, private hostnam
 
 - `azure-cli`
 - `azure-devops`
-- `broken-to-fixed-loop`
+- `loop-broken-to-fixed`
 - `codex-report-usage`
 - `coolify-cli`
-- `idea-to-program-loop`
+- `loop-idea-to-program`
 - `my-vault`
-- `rule-to-done-loop`
+- `loop-rule-to-done`
 - `saas-backend-patterns`
 - `saas-frontend-patterns`
 - `saas-project-bootstrap`
