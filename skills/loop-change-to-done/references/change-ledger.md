@@ -1,11 +1,11 @@
-# Rule Ledger
+# Change Ledger
 
 Use this for normal or risky behavior changes.
 
-## Rule Shape
+## Change Shape
 
 ```text
-Rule:
+Change:
 Actor:
 Trigger:
 Condition:

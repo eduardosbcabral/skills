@@ -1,4 +1,0 @@
-interface:
-  display_name: "Rule to Done Loop"
-  short_description: "Implement a rule with focused verification"
-  default_prompt: "Use $loop-rule-to-done to turn this business rule into an implemented, verified change."

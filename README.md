@@ -20,7 +20,7 @@ This repository is intended to stay public. Keep personal paths, private hostnam
 - `coolify-cli`
 - `loop-idea-to-build`
 - `my-vault`
-- `loop-rule-to-done`
+- `loop-change-to-done`
 - `saas-backend-patterns`
 - `saas-frontend-patterns`
 - `saas-project-bootstrap`

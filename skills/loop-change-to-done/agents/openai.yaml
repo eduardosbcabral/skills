@@ -1,0 +1,4 @@
+interface:
+  display_name: "Change to Done Loop"
+  short_description: "Implement a scoped change with verification"
+  default_prompt: "Use $loop-change-to-done to turn this requested change into an implemented, verified result."
