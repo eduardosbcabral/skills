@@ -18,10 +18,15 @@ This repository is intended to stay public. Keep personal paths, private hostnam
 - `broken-to-fixed-loop`
 - `codex-report-usage`
 - `coolify-cli`
-- `grill-with-docs`
 - `idea-to-program-loop`
 - `my-vault`
 - `rule-to-done-loop`
 - `saas-backend-patterns`
 - `saas-frontend-patterns`
 - `saas-project-bootstrap`
+
+## External Companion Skills
+
+Some loop skills can use optional companion skills when they are installed locally. These are referenced by name but are not bundled here.
+
+- `$grill-with-docs`: external third-party companion for grilling unclear requirements and capturing glossary/ADR decisions.

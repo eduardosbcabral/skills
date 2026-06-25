@@ -12,7 +12,7 @@ Turn one desired behavior into the smallest correct, verified change. Most small
 At start, check whether companion skills are available in the session. If a step would use a missing companion, say `missing companion skill: $name; using inline fallback` once and continue. Treat missing companions as blocking only when no inline/tool fallback can satisfy the step.
 
 - Simplicity: `$ponytail`, `$ponytail-review`.
-- Direction/domain: `$grill-with-docs`, `$domain-modeling`, `$prototype`.
+- Direction/domain: `$grill-with-docs` (external companion), `$domain-modeling`, `$prototype`.
 - Delivery/sensors: `$github:gh-fix-ci`, `$saas-backend-patterns`, `$saas-frontend-patterns`, relevant security skills.
 - Planning outputs: `$to-issues`, `$handoff` only when tickets or resumable handoff are actually needed.
 

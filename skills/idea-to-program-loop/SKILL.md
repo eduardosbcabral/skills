@@ -12,7 +12,7 @@ Turn rough intent into a controlled program of work: source facts, domain rules,
 At start, check whether companion skills are available in the session. If a step would use a missing companion, say `missing companion skill: $name; using inline fallback` once and continue. Treat missing companions as blocking only when no inline/tool fallback can satisfy the step.
 
 - Simplicity: `$ponytail`, `$ponytail-review`.
-- Direction/domain: `$grill-with-docs`, `$domain-modeling`, `$prototype`.
+- Direction/domain: `$grill-with-docs` (external companion), `$domain-modeling`, `$prototype`.
 - Planning outputs: `$to-prd`, `$to-issues`, `$handoff`.
 - Delivery/sensors: `$improve-codebase-architecture`, `$github:gh-fix-ci`, `$saas-backend-patterns`, `$saas-frontend-patterns`, relevant security skills.
 

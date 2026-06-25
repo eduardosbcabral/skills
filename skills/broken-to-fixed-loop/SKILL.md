@@ -12,7 +12,7 @@ Run a controlled diagnosis loop from symptom to verified root-cause fix.
 At start, check whether companion skills are available in the session. If a step would use a missing companion, say `missing companion skill: $name; using inline fallback` once and continue. Treat missing companions as blocking only when no inline/tool fallback can satisfy the step.
 
 - Simplicity: `$ponytail`, `$ponytail-review`.
-- Diagnosis/direction: `$diagnosing-bugs`, `$grill-with-docs`, `$prototype`.
+- Diagnosis/direction: `$diagnosing-bugs`, `$grill-with-docs` (external companion), `$prototype`.
 - Delivery/sensors: `$github:gh-fix-ci`, `$saas-backend-patterns`, `$saas-frontend-patterns`, relevant security skills.
 - Resumption: `$handoff` only when the loop must pause, move, or survive context loss.
 
