@@ -13,7 +13,7 @@ At start, check whether companion skills are available in the session. If a step
 
 - Simplicity: `$ponytail`, `$ponytail-review`.
 - Direction/domain: `$grill-with-docs` (external companion), `$domain-modeling`, `$prototype`.
-- Delivery/sensors: `$github:gh-fix-ci`, `$saas-backend-patterns`, `$saas-frontend-patterns`, relevant security skills.
+- Delivery/sensors: `$github:gh-fix-ci`, relevant security skills.
 - Planning outputs: `$to-issues`, `$handoff` only when tickets or resumable handoff are actually needed.
 
 ## Start

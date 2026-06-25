@@ -13,7 +13,7 @@ At start, check whether companion skills are available in the session. If a step
 
 - Simplicity: `$ponytail`, `$ponytail-review`.
 - Diagnosis/direction: `$diagnosing-bugs`, `$grill-with-docs` (external companion), `$prototype`.
-- Delivery/sensors: `$github:gh-fix-ci`, `$saas-backend-patterns`, `$saas-frontend-patterns`, relevant security skills.
+- Delivery/sensors: `$github:gh-fix-ci`, relevant security skills.
 - Resumption: `$handoff` only when the loop must pause, move, or survive context loss.
 
 ## Start
