@@ -82,6 +82,7 @@ This repository is intended to stay public. Keep personal paths, private hostnam
 - `codex-report-usage`
 - `coolify-cli`
 - `loop-idea-to-build`
+- `loop-state-and-stall-guard`
 - `my-vault`
 - `loop-change-to-done`
 - `rtk-token-saver`

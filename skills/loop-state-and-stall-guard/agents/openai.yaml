@@ -1,0 +1,4 @@
+interface:
+  display_name: "Loop State And Stall Guard"
+  short_description: "Persist loop state and detect stalls"
+  default_prompt: "Use $loop-state-and-stall-guard to persist this loop's state and avoid repeating stalled attempts."

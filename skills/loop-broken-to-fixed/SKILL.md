@@ -13,6 +13,7 @@ At start, check whether companion skills are available in the session. If a step
 
 - Simplicity: `$ponytail`, `$ponytail-review`.
 - Token efficiency: `$rtk-token-saver` (optional; compact noisy shell output when RTK is installed and exact raw output is not required).
+- State/stall: `$loop-state-and-stall-guard` (optional; persist resumable loop state and detect repeated failed attempts).
 - Diagnosis/direction: `$diagnosing-bugs`, `$grill-with-docs` (external companion), `$prototype`.
 - Delivery/sensors: `$github:gh-fix-ci`, relevant security skills.
 - Resumption: `$handoff` only when the loop must pause, move, or survive context loss.
@@ -30,7 +31,7 @@ At start, check whether companion skills are available in the session. If a step
 1. Reproduce or bound the failure with a local test, command, browser flow, CI log, trace, or artifact.
 2. Track one evidence-backed hypothesis at a time and name its falsification step.
 3. Use `$rtk-token-saver` for noisy test/log/CI summaries when available; switch to raw output for exact stack traces, compiler diagnostics, snapshots, traces, or security detail.
-4. Record mode, state, objective verifier, hard stop, sensors, and human approval gates.
+4. Record mode, state, objective verifier, hard stop, sensors, and human approval gates; use `$loop-state-and-stall-guard` for resumable diagnosis or repeated failed hypotheses.
 5. Inspect the smallest relevant code path and caller set before editing.
 6. Apply the embedded Ponytail gate: fix once at the shared root cause, prefer existing code/stdlib/native/installed dependency, and avoid broad refactors. Never choose a tiny diff that only patches the named symptom while sibling paths remain broken.
 7. Patch the smallest cause-specific fix.
@@ -39,7 +40,7 @@ At start, check whether companion skills are available in the session. If a step
 10. Run the build/lint gate for app code when available; record unavailable/too-costly gates and nearest proxy.
 11. Run the simplicity review gate: use `$ponytail-review` when available, otherwise inline-check for unnecessary dependency, abstraction, wrapper, dead flexibility, stdlib/native miss, or larger-than-needed diff.
 12. Run the correctness review gate: use `loop-rule-reviewer` for normal/risky code, data, permission, concurrency, performance, or regression changes; inline fallback only after recording subagent discovery/fallback evidence.
-13. Fix blocking review findings, then rerun the original symptom or affected regression/build gates.
+13. Fix blocking review findings, then rerun the original symptom or affected regression/build gates; before retrying the same failure repeatedly, run the stall guard and switch hypothesis if it triggers.
 14. Ask before opening a PR unless already requested. After push/PR, monitor CI/CD when local pipeline coverage was incomplete and CI/CD exists, or record that CI/CD is unavailable/delegated.
 15. Update persistent state only for automated, recurring, multi-thread, or resumable loops.
 16. End with decision: done, continue with a new hypothesis, ask, escalate, or stop; include root cause, verifier, build/lint, simplicity review, correctness review, PR/CI status, state update, and residual risk.

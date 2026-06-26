@@ -13,6 +13,7 @@ At start, check whether companion skills are available in the session. If a step
 
 - Simplicity: `$ponytail`, `$ponytail-review`.
 - Token efficiency: `$rtk-token-saver` (optional; compact noisy shell output when RTK is installed and exact raw output is not required).
+- State/stall: `$loop-state-and-stall-guard` (optional; persist resumable loop state and detect repeated failed attempts).
 - Direction/domain: `$grill-with-docs` (external companion), `$domain-modeling`, `$prototype`.
 - Planning outputs: `$to-prd`, `$to-issues`, `$handoff`.
 - Delivery/sensors: `$improve-codebase-architecture`, `$github:gh-fix-ci`, relevant security skills.
@@ -31,7 +32,7 @@ At start, check whether companion skills are available in the session. If a step
 2. Extract actors, workflows, terms, rules, permissions, lifecycle states, integrations, data objects, and constraints.
 3. Define harness evidence: source checks, local tests/CLI, build/typecheck/lint, browser paths, CI, logs/traces, docs, customer artifacts, or optional external sensors.
 4. Use `$rtk-token-saver` for noisy terminal evidence when available; use raw output when exact diagnostics, traces, snapshots, or security detail matters.
-5. Record mode, state, objective verifier/acceptance evidence, hard stop, sensors, and human approval gates.
+5. Record mode, state, objective verifier/acceptance evidence, hard stop, sensors, and human approval gates; use `$loop-state-and-stall-guard` for resumable/automated work.
 6. Apply the embedded Ponytail gate to planning: slice the smallest user-visible or system-verifiable program, reuse existing product/code/platform capability, and avoid speculative architecture. Never cut explicit customer rules, security, accessibility, data ownership, compliance, or required validation.
 7. Produce a brief rule catalog, glossary, vertical slices, and first phase goal.
 8. Self-review against source facts, assumptions, missing decisions, slice quality, and evidence.
@@ -41,7 +42,7 @@ At start, check whether companion skills are available in the session. If a step
 12. Create a concrete Codex goal only when the user asks for a goal or extended implementation loop.
 13. If code changes are produced, run the build/lint gate when available and record gaps/proxies.
 14. Ask before opening a PR unless already requested. After push/PR, monitor CI/CD when local pipeline coverage was incomplete and CI/CD exists, or record that CI/CD is unavailable/delegated.
-15. Update persistent state only for automated, recurring, multi-thread, or resumable loops.
+15. Update persistent state only for automated, recurring, multi-thread, or resumable loops; before repeating a failed gate, check the stall guard and change strategy if it triggers.
 16. Stop for user input before billing, authorization, legal/compliance, data ownership, or core workflow semantics are decided by guess.
 17. End with decision: done, continue, ask, escalate, or stop; include evidence, build/lint if code changed, simplicity review, correctness review, PR/CI status, state update, and open risks.
 

@@ -13,6 +13,7 @@ At start, check whether companion skills are available in the session. If a step
 
 - Simplicity: `$ponytail`, `$ponytail-review`.
 - Token efficiency: `$rtk-token-saver` (optional; compact noisy shell output when RTK is installed and exact raw output is not required).
+- State/stall: `$loop-state-and-stall-guard` (optional; persist resumable loop state and detect repeated failed attempts).
 - Direction/domain: `$grill-with-docs` (external companion), `$domain-modeling`, `$prototype`.
 - Delivery/sensors: `$github:gh-fix-ci`, relevant security skills.
 - Planning outputs: `$to-issues`, `$handoff` only when tickets or resumable handoff are actually needed.
@@ -29,7 +30,7 @@ At start, check whether companion skills are available in the session. If a step
 
 1. Inspect current behavior and nearby patterns.
 2. Convert the change into acceptance examples, including negative/edge examples when useful.
-3. Record mode, state, objective verifier, hard stop, sensors, and human approval gates.
+3. Record mode, state, objective verifier, hard stop, sensors, and human approval gates; use `$loop-state-and-stall-guard` only for resumable, automated, or repeated-failure work.
 4. Use `$rtk-token-saver` for noisy repo inspection, tests, lint, build, CI, or logs when available; use raw output when exact diagnostics or full detail matters.
 5. Apply the embedded Ponytail gate before coding: reuse existing code, stdlib, native platform, or installed dependency before new code; write the fewest files that satisfy the change. Never cut explicit business rules, trust-boundary validation, security, accessibility, data-loss handling, or required checks.
 6. Implement the smallest scoped change at the narrowest correct point.
@@ -38,7 +39,7 @@ At start, check whether companion skills are available in the session. If a step
 9. Run the build/lint gate for app code when available; record unavailable/too-costly gates and nearest proxy.
 10. Run the simplicity review gate: use `$ponytail-review` when available, otherwise inline-check for unnecessary dependency, abstraction, wrapper, dead flexibility, stdlib/native miss, or larger-than-needed diff.
 11. Run the correctness review gate: use `loop-rule-reviewer` for normal/risky code or behavior changes; inline fallback only after recording subagent discovery/fallback evidence.
-12. Fix blocking review findings, then rerun affected verification and build/lint gates.
+12. Fix blocking review findings, then rerun affected verification and build/lint gates; before retrying the same failed gate repeatedly, run the stall guard and change strategy if it triggers.
 13. Ask before opening a PR unless already requested. After push/PR, monitor CI/CD when local pipeline coverage was incomplete and CI/CD exists, or record that CI/CD is unavailable/delegated.
 14. Update persistent state only for automated, recurring, multi-thread, or resumable loops.
 15. Capture durable rule/change knowledge only when business-significant.
