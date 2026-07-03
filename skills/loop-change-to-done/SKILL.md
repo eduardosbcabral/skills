@@ -7,6 +7,28 @@ description: "Use when the user gives a small or medium scoped change, business 
 
 Turn one desired change into the smallest correct, verified result. Most small changes should finish in one iteration.
 
+## Strict Execution Contract
+
+When this skill triggers, follow the gates below exactly. Do not silently skip a gate.
+
+Before editing files, running a deploy, committing, pushing, or opening a PR, emit a short `Loop checkpoint` with:
+
+- loop type and classification: tiny, normal, or large/risky
+- actor, trigger, condition, expected outcome, rejected outcome, and key edge cases
+- acceptance examples or the reason they are unnecessary for a tiny mechanical change
+- whether `$grill-with-docs` is required, completed, or explicitly skipped with a reason
+- whether the user is asking for conversation/refinement only or authorizing implementation
+- PR decision: not requested, ask later, or already requested
+
+Hard stops:
+
+- If the user says they are only discussing, refining, asking "what do you think", or asking for suggestions, do not implement. Answer, inspect, or ask the next question only.
+- For normal/risky changes that affect behavior, contracts, permissions, UX, data, lifecycle state, or core business rules, `$grill-with-docs` is mandatory before implementation. Ask one question at a time and wait for the user unless code/docs can answer that question directly.
+- Do not edit until acceptance examples are explicit enough to verify or the change is classified tiny with a named skip reason.
+- Ask before opening a PR unless the user has already explicitly requested a PR.
+
+Final response must include a compact gate report: acceptance examples, verifier, build/lint, `$grill-with-docs` status, simplicity review status, correctness review status, PR/CI status, and residual risk.
+
 ## Companion Skills
 
 At start, check whether companion skills are available in the session. If a step would use a missing companion, say `missing companion skill: $name; using inline fallback` once and continue. Treat missing companions as blocking only when no inline/tool fallback can satisfy the step.
@@ -22,7 +44,7 @@ At start, check whether companion skills are available in the session. If a step
 
 1. Restate the change as actor, trigger, condition, expected outcome, rejected outcome, and edge cases when applicable.
 2. Classify: tiny, normal, or large/risky. Use `references/loop-control.md` for non-tiny work, extended loops, automation, subagents, recurring work, or hands-off execution.
-3. Run the solution discussion gate before implementing normal/risky changes: use `$grill-with-docs` to challenge direction, domain terms, acceptance examples, risky decisions, and solution shape. For tiny changes, skip this gate unless ambiguity or risk would make the loop encode guesses.
+3. Run and report the solution discussion gate before implementing normal/risky changes: use `$grill-with-docs` to challenge direction, domain terms, acceptance examples, risky decisions, and solution shape. For tiny changes, skip this gate only after naming the skip reason in the `Loop checkpoint`.
 4. In a codebase, read local guidance before editing: `AGENTS.md`, README, docs, architecture notes, scripts, test conventions, and nearby implementations.
 5. Load only needed references: `harness-contract.md` for sensors/verification, `change-ledger.md` for normal/risky changes, `loop-prompts.md` for prompts/review gates, and `self-review.md` before final completion.
 
@@ -43,7 +65,7 @@ At start, check whether companion skills are available in the session. If a step
 13. Ask before opening a PR unless already requested. After push/PR, monitor CI/CD when local pipeline coverage was incomplete and CI/CD exists, or record that CI/CD is unavailable/delegated.
 14. Update persistent state only for automated, recurring, multi-thread, or resumable loops.
 15. Capture durable rule/change knowledge only when business-significant.
-16. End with decision: done, continue, ask, escalate, or stop; include verifier, build/lint, simplicity review, correctness review, PR/CI status, state update, and residual risk.
+16. End with decision: done, continue, ask, escalate, or stop; include acceptance examples, verifier, build/lint, `$grill-with-docs` status, simplicity review, correctness review, PR/CI status, state update, and residual risk.
 
 ## Subagents
 

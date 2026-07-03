@@ -7,6 +7,28 @@ description: "Use when the user has a rough product idea, customer PDF/spec, mee
 
 Turn rough intent into a controlled build path: source facts, domain rules, vertical slices, evidence, and a first build goal.
 
+## Strict Execution Contract
+
+When this skill triggers, follow the gates below exactly. Do not silently skip a gate.
+
+Before planning outputs become implementation, before editing files, and before committing, pushing, or opening a PR, emit a short `Loop checkpoint` with:
+
+- loop type and classification: tiny, normal, or large/risky
+- source facts, assumptions, unknowns, and decisions still needed
+- acceptance evidence or the reason it is not yet knowable
+- whether `$grill-with-docs` is required, completed, or explicitly skipped with a reason
+- whether the user is asking for conversation/refinement only or authorizing implementation
+- PR decision: not requested, ask later, or already requested
+
+Hard stops:
+
+- If the user says they are only discussing, refining, asking "what do you think", or asking for suggestions, do not implement. Explore, clarify, or ask the next question only.
+- For normal/large/risky product direction, domain, workflow, data, permission, lifecycle, or UX decisions, `$grill-with-docs` is mandatory before implementation planning is treated as settled. Ask one question at a time and wait for the user unless code/docs can answer that question directly.
+- Do not create implementation code until unresolved business decisions are named and either answered by evidence/user feedback or explicitly deferred out of scope.
+- Ask before opening a PR unless the user has already explicitly requested a PR.
+
+Final response must include a compact gate report: source facts/assumptions, acceptance evidence, build/lint if code changed, `$grill-with-docs` status, simplicity review status, correctness review status, PR/CI status, and residual risk.
+
 ## Companion Skills
 
 At start, check whether companion skills are available in the session. If a step would use a missing companion, say `missing companion skill: $name; using inline fallback` once and continue. Treat missing companions as blocking only when no inline/tool fallback can satisfy the step.
@@ -22,7 +44,7 @@ At start, check whether companion skills are available in the session. If a step
 
 1. Identify the input: idea, customer PDF/spec, notes, product gap, epic, or non-technical business request.
 2. Classify: tiny, normal, or large/risky. Use `references/loop-control.md` for normal/large work, extended loops, automation, subagents, recurring work, or hands-off execution.
-3. Run the solution discussion gate before planning normal/large/risky work: use `$grill-with-docs` to challenge product direction, domain language, source facts, business decisions, acceptance evidence, and the first build shape. For tiny work, skip this gate unless ambiguity or risk would make the loop encode guesses.
+3. Run and report the solution discussion gate before planning normal/large/risky work: use `$grill-with-docs` to challenge product direction, domain language, source facts, business decisions, acceptance evidence, and the first build shape. For tiny work, skip this gate only after naming the skip reason in the `Loop checkpoint`.
 4. If targeting a codebase, read local guidance before planning: `AGENTS.md`, README, docs, architecture notes, scripts, test conventions, and existing flows.
 5. Load only needed references: `harness-contract.md` for sensors, `program-brief.md` for normal/large work, `loop-prompts.md` for prompts/review gates, and `self-review.md` before final completion.
 
@@ -44,7 +66,7 @@ At start, check whether companion skills are available in the session. If a step
 14. Ask before opening a PR unless already requested. After push/PR, monitor CI/CD when local pipeline coverage was incomplete and CI/CD exists, or record that CI/CD is unavailable/delegated.
 15. Update persistent state only for automated, recurring, multi-thread, or resumable loops; before repeating a failed gate, check the stall guard and change strategy if it triggers.
 16. Stop for user input before billing, authorization, legal/compliance, data ownership, or core workflow semantics are decided by guess.
-17. End with decision: done, continue, ask, escalate, or stop; include evidence, build/lint if code changed, simplicity review, correctness review, PR/CI status, state update, and open risks.
+17. End with decision: done, continue, ask, escalate, or stop; include evidence, build/lint if code changed, `$grill-with-docs` status, simplicity review, correctness review, PR/CI status, state update, and open risks.
 
 ## Subagents
 

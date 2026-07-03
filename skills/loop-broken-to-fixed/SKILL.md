@@ -7,6 +7,27 @@ description: "Use when the user reports an exception, stack trace, failed CI che
 
 Run a controlled diagnosis loop from symptom to verified root-cause fix.
 
+## Strict Execution Contract
+
+When this skill triggers, follow the gates below exactly. Do not silently skip a gate.
+
+Before editing files, running a deploy, committing, pushing, or opening a PR, emit a short `Loop checkpoint` with:
+
+- loop type and classification: tiny, normal, or large/risky
+- captured symptom and expected verifier
+- whether `$grill-with-docs` is required, completed, or explicitly skipped with a reason
+- whether the user is asking for conversation/refinement only or authorizing implementation
+- PR decision: not requested, ask later, or already requested
+
+Hard stops:
+
+- If the user says they are only discussing, refining, asking "what do you think", or asking for suggestions, do not implement. Answer, inspect, or ask the next question only.
+- If the fix changes expected behavior, contracts, data, permissions, UX, core rules, or product semantics, `$grill-with-docs` is mandatory before implementation unless the change is truly tiny and cause-specific. If skipped, state the concrete tiny-skip reason in the checkpoint.
+- If the work changes from bug diagnosis into a feature or business-rule change, switch to `$loop-change-to-done` and run its start gates before implementation.
+- Ask before opening a PR unless the user has already explicitly requested a PR.
+
+Final response must include a compact gate report: symptom/root cause, verifier, build/lint, `$grill-with-docs` status, simplicity review status, correctness review status, PR/CI status, and residual risk.
+
 ## Companion Skills
 
 At start, check whether companion skills are available in the session. If a step would use a missing companion, say `missing companion skill: $name; using inline fallback` once and continue. Treat missing companions as blocking only when no inline/tool fallback can satisfy the step.
@@ -22,7 +43,7 @@ At start, check whether companion skills are available in the session. If a step
 
 1. Capture the exact symptom: error text, stack trace, failing check, URL/action, timestamp, environment, impact, and expected behavior.
 2. Classify: tiny, normal, or large/risky. Use `references/loop-control.md` for non-tiny work, extended loops, automation, subagents, recurring work, or hands-off execution.
-3. Schedule the solution discussion gate: reproduce or bound the failure first, then use `$grill-with-docs` before implementation when the fix changes expected behavior, contracts, data, permissions, UX, core rules, or risky direction. For tiny cause-specific fixes with clear expected behavior, skip this gate unless ambiguity or risk would make the loop encode guesses.
+3. Schedule and report the solution discussion gate: reproduce or bound the failure first, then use `$grill-with-docs` before implementation when the fix changes expected behavior, contracts, data, permissions, UX, core rules, or risky direction. For tiny cause-specific fixes with clear expected behavior, skip this gate only after naming the skip reason in the `Loop checkpoint`.
 4. In a codebase, read local guidance before diagnosis: `AGENTS.md`, README, docs, runbooks, architecture notes, scripts, test conventions, and nearby implementations.
 5. Load only needed references: `harness-contract.md` for sensors, `diagnosis-ledger.md` for non-tiny/competing hypotheses, `loop-prompts.md` for prompts/review gates, and `self-review.md` before final completion.
 
@@ -43,7 +64,7 @@ At start, check whether companion skills are available in the session. If a step
 13. Fix blocking review findings, then rerun the original symptom or affected regression/build gates; before retrying the same failure repeatedly, run the stall guard and switch hypothesis if it triggers.
 14. Ask before opening a PR unless already requested. After push/PR, monitor CI/CD when local pipeline coverage was incomplete and CI/CD exists, or record that CI/CD is unavailable/delegated.
 15. Update persistent state only for automated, recurring, multi-thread, or resumable loops.
-16. End with decision: done, continue with a new hypothesis, ask, escalate, or stop; include root cause, verifier, build/lint, simplicity review, correctness review, PR/CI status, state update, and residual risk.
+16. End with decision: done, continue with a new hypothesis, ask, escalate, or stop; include root cause, verifier, build/lint, `$grill-with-docs` status, simplicity review, correctness review, PR/CI status, state update, and residual risk.
 
 ## Subagents
 
