@@ -1,13 +1,20 @@
 ---
 name: create-wiki-notes
-description: Use when creating a new note, page, project map, operational note, inbox capture, or lightweight documentation entry in Eduardo Wiki.
+description: Use when creating a new note, page, project map, operational note, inbox capture, or lightweight documentation entry in Eduardo Notes or the Agent Wiki.
 ---
 
 # Create Wiki Notes
 
 ## Principle
 
-Create the smallest useful wiki note, place it in the right folder, and sync it.
+Create the smallest useful note, place it in the right folder, and sync it.
+
+## Naming
+
+- `Eduardo Notes`: the full notes repository and Obsidian vault.
+- `Agent Wiki`: the agent-facing subfolder at `wiki/`.
+- `PARA notes`: human-facing notes in `projects/`, `areas/`, `resources/`, and `archive/`.
+- Do not call the whole notes repository "the wiki".
 
 ## Required Sub-Skill
 
@@ -38,13 +45,13 @@ tags:
 
 5. Write concise content. Prefer bullets and commands over long explanation.
 6. Update a nearby `index.md` only when the new note is meant to be discoverable later.
-7. Run the wiki git sync from `my-wiki`: pull before editing, then status, add only intended files, commit, and push.
+7. Run the Eduardo Notes git sync from `my-wiki`: pull before editing, then status, add only intended files, commit, and push.
 
 ## Defaults
 
-- Use English for agent-facing pages under `wiki/`.
+- Use English for Agent Wiki pages under `wiki/`.
 - Use the user's natural language for personal or human-facing notes.
-- Do not reference local machine paths in wiki content. Use the GitHub repository identity when a portable reference is needed: `git@github.com:eduardosbcabral/notes.git`.
+- Do not reference local machine paths in notes. Use the GitHub repository identity when a portable reference is needed: `git@github.com:eduardosbcabral/notes.git`.
 - Keep OpenClaw, Coolify, Telegram, GitHub, and automation procedures in `wiki/agent-memory/` unless the user asks for a project-specific map.
 
 ## Common Note Types

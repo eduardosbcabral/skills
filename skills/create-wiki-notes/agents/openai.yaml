@@ -1,6 +1,6 @@
 interface:
   display_name: "Create Wiki Notes"
-  short_description: "Create simple Eduardo Wiki notes"
-  default_prompt: "Use $create-wiki-notes to create a concise note in Eduardo Wiki."
+  short_description: "Create notes in Eduardo Notes"
+  default_prompt: "Use $create-wiki-notes to create a concise note in Eduardo Notes or the Agent Wiki."
 policy:
   allow_implicit_invocation: true

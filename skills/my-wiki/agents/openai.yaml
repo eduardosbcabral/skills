@@ -1,0 +1,6 @@
+interface:
+  display_name: "My Notes"
+  short_description: "Work with a notes repository and Agent Wiki"
+  default_prompt: "Use $my-wiki to find, update, or create notes in a notes repository or Agent Wiki."
+policy:
+  allow_implicit_invocation: true
