@@ -1,0 +1,7 @@
+interface:
+  display_name: "Codex Remove UI Noise"
+  short_description: "Remove explanatory and internal UI copy"
+  default_prompt: "Use $codex-remove-ui-noise to simplify this interface and remove unnecessary explanatory copy."
+
+policy:
+  allow_implicit_invocation: true
