@@ -45,6 +45,17 @@ Before declaring the slice ready, look only for removable complexity: `delete`, 
 
 Keep progress and final prose terse: remove filler, hedging, pleasantries, repeated summaries, tool narration, decorative tables, emoji, and long raw logs. Fragments are fine. Preserve the user's language and preserve code, commands, API names, identifiers, and exact errors. Do not invent abbreviations or sacrifice clarity for security warnings, irreversible confirmations, ambiguity, or multi-step instructions.
 
+## Subagents
+
+Delegate bounded, important work when the role is useful; the parent owns synthesis and decisions.
+
+- `loop-domain-extractor`: extract facts, rules, workflows, unknowns, and contradictions from substantial or ambiguous source material.
+- `loop-harness-sensor`: collect independent evidence from tests, CLI, browser, CI, logs, traces, or connected tools.
+- `loop-slice-planner`: turn a settled normal/risky model into vertical slices and a first executable goal.
+- `loop-rule-reviewer`: independently review the final contract, plan, or implementation against sources, rules, scope, acceptance evidence, and regression risk.
+
+For normal/risky work, delegated `loop-rule-reviewer` review is required before Done. For tiny work, skip it only with a concrete reason. If a named custom agent is unavailable but subagents are supported, use a built-in `default` or `explorer` agent with the same bounded role and record the fallback. If no subagent facility exists, report the review gap instead of claiming delegated review passed. Do not delegate business decisions or allow parallel write ownership to overlap.
+
 ## Loop
 
 1. Extract actors, workflows, terms, rules, permissions, lifecycle states, data objects, integrations, and constraints that matter to the first slice.
@@ -64,7 +75,7 @@ Verifier:
 Deferred decisions:
 ```
 
-6. Run Ponytail Review and a correctness review against the source facts, rules, permissions, edge cases, and acceptance evidence. Fix blocking findings.
+6. Run Ponytail Review, then delegate correctness review according to the Subagents contract. Fix blocking findings and re-review affected areas.
 7. If implementation was requested, transition into Change To Done and execute the contract. Otherwise, return the contract and stop.
 
 ## Conditional Modes

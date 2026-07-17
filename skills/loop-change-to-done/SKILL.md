@@ -45,6 +45,16 @@ Use after implementation when the diff adds abstraction, spans several files, or
 
 Keep progress and final prose terse: remove filler, hedging, pleasantries, repeated summaries, tool narration, decorative tables, emoji, and long raw logs. Fragments are fine. Preserve the user's language and preserve code, commands, API names, identifiers, and exact errors. Do not invent abbreviations or sacrifice clarity for security warnings, irreversible confirmations, ambiguity, or multi-step instructions.
 
+## Subagents
+
+Delegate bounded, important work when it improves independence or verification; the parent owns synthesis and final scope.
+
+- `loop-harness-sensor`: collect focused verification evidence independently.
+- `worker`: implement a clearly owned slice when parallel execution is useful and file ownership does not overlap.
+- `loop-rule-reviewer`: independently review the diff against requested behavior, rejected behavior, rules, scope, evidence, and regression risk.
+
+For every normal/risky code or behavior change, delegated `loop-rule-reviewer` review is required before Done. For a tiny mechanical edit, skip it only with a concrete reason. If a named custom agent is unavailable but subagents are supported, use a built-in `default` agent with the same bounded review prompt and record the fallback. If no subagent facility exists, report the review gap instead of claiming delegated review passed. Never use parallel writers on overlapping files.
+
 ## Loop
 
 1. Convert the request into concrete positive, negative, and boundary acceptance examples where useful.
@@ -53,7 +63,7 @@ Keep progress and final prose terse: remove filler, hedging, pleasantries, repea
 4. Self-review the diff for requested behavior, rejected behavior, edge cases, security boundaries, accidental scope, and project conventions.
 5. Run the tightest verifier first. Then run relevant test, typecheck, lint, build, CLI, API, or browser evidence in proportion to risk.
 6. If a verifier fails for an unknown reason, transition to Broken To Fixed. If the implementation was wrong, correct it here and rerun only affected evidence.
-7. Run Ponytail Review when complexity warrants it and correctness review for normal/risky behavior. Fix blocking findings, then rerun affected verification.
+7. Run Ponytail Review when complexity warrants it, then delegate correctness review according to the Subagents contract. Fix blocking findings, rerun affected verification, and re-review affected areas.
 8. Capture durable rule documentation only when the behavior is business-significant and the repository has a clear home for it.
 9. Commit, push, open a PR, monitor CI, or deploy only when requested. A PR is an optional delivery action, not part of the definition of done.
 

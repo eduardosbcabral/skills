@@ -4,43 +4,37 @@ Reusable Codex skills and custom agents for development workflows.
 
 ## Layout
 
-- `skills/`: installable skill folders. Copy the folders you want into `~/.agents/skills/` for Codex or `~/.claude/skills/` for Claude Code.
-- `.codex/agents/`: optional custom Codex agent definitions. Copy the TOML files you want into `~/.codex/agents/`.
+- `skills/`: installable skill folders.
+- `.codex/agents/`: custom Codex subagent definitions used by the loop skills.
+- `scripts/install.py`: installs skills together with their mapped subagents and optional skill dependencies.
 
 ## Install in Codex
 
-Codex discovers skills from local skill folders. For a personal install available across your projects, copy skill folders into `~/.agents/skills/`. Codex also supports repo-scoped skills at `.agents/skills/` inside a project.
+Codex discovers personal skills under `${CODEX_HOME:-~/.codex}/skills/` and project-scoped skills under `.agents/skills/`. Custom agents are separate: personal definitions live under `${CODEX_HOME:-~/.codex}/agents/` and project-scoped definitions under `.codex/agents/`.
 
 Install all skills from this repository for your user:
 
 ```bash
 git clone https://github.com/eduardosbcabral/skills.git /tmp/eduardo-skills
-mkdir -p ~/.agents/skills
-cp -R /tmp/eduardo-skills/skills/* ~/.agents/skills/
+cd /tmp/eduardo-skills
+python3 scripts/install.py --all
 ```
 
-Install only one skill:
+Install one loop skill with its mapped custom agents and `$rtk-token-saver` dependency:
 
 ```bash
-mkdir -p ~/.agents/skills
-cp -R skills/loop-change-to-done ~/.agents/skills/
+python3 scripts/install.py loop-change-to-done
 ```
 
 Install repo-scoped skills instead of user-global skills:
 
 ```bash
-mkdir -p .agents/skills
-cp -R skills/loop-change-to-done .agents/skills/
+python3 scripts/install.py --project /path/to/workspace loop-change-to-done
 ```
+
+The generic Codex skill installer copies only the requested skill folder. It does not follow references to this repository's `.codex/agents/` directory. Use `scripts/install.py` for loop skills when their custom agents should be installed automatically.
 
 Use a skill explicitly by mentioning it in the prompt, for example `$loop-change-to-done`. Codex may also invoke a skill automatically when the task matches the `description` in `SKILL.md`. If a newly copied skill does not appear, restart Codex.
-
-Custom agents are separate from skills. To install the bundled Codex agents globally:
-
-```bash
-mkdir -p ~/.codex/agents
-cp .codex/agents/*.toml ~/.codex/agents/
-```
 
 ## Install in Claude Code
 
@@ -78,14 +72,16 @@ This repository is intended to stay public. Keep personal paths, private hostnam
 
 - `azure-cli`
 - `azure-devops`
-- `loop-broken-to-fixed`
+- `codex-remove-ui-noise`
 - `codex-report-usage`
 - `coolify-cli`
+- `create-wiki-notes`
+- `loop-broken-to-fixed`
+- `loop-change-to-done`
 - `loop-idea-to-build`
 - `loop-state-and-stall-guard`
 - `my-skills`
-- `my-vault`
-- `loop-change-to-done`
+- `my-wiki`
 - `rtk-token-saver`
 - `saas-backend-patterns`
 - `saas-frontend-patterns`
@@ -93,6 +89,6 @@ This repository is intended to stay public. Keep personal paths, private hostnam
 
 ## Loop Dependencies
 
-The three loop skills are self-contained. Their product, change, diagnosis, grilling, simplicity, output-style, and stall-control behavior is bundled inside each loop.
+The three loop skills bundle their product, change, diagnosis, grilling, simplicity, output-style, and stall-control behavior. They delegate bounded extraction, evidence, planning, diagnosis, implementation, and independent review to custom or built-in subagents.
 
-They can load the bundled `$rtk-token-saver` as an optional operational dependency before shell-heavy work. That skill uses the external RTK CLI from `rtk-ai/rtk` when available and falls back to normal commands when RTK is unavailable or exact raw output is required.
+The repository installer adds each loop's mapped custom agents and the bundled `$rtk-token-saver` optional dependency. RTK uses the external CLI from `rtk-ai/rtk` when available and falls back to normal commands when RTK is unavailable or exact raw output is required.

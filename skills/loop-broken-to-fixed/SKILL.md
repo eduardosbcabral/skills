@@ -45,6 +45,17 @@ Review the fix only for removable complexity: `delete`, `stdlib`, `native`, `yag
 
 Keep progress and final prose terse: remove filler, hedging, pleasantries, repeated summaries, tool narration, decorative tables, emoji, and long raw logs. Fragments are fine. Preserve the user's language and preserve code, commands, API names, identifiers, and exact errors. Do not invent abbreviations or sacrifice clarity for security warnings, irreversible confirmations, ambiguity, or multi-step instructions.
 
+## Subagents
+
+Delegate bounded diagnosis, evidence, implementation, and review tasks when they improve independence; the parent owns the active hypothesis and synthesis.
+
+- `loop-bug-diagnoser`: independently reproduce or bound normal/risky failures, rank hypotheses, and identify the smallest likely fix area.
+- `loop-harness-sensor`: collect focused evidence from tests, CI, browser, logs, traces, or runtime sensors.
+- `worker`: implement a clearly owned cause-specific fix when write ownership does not overlap.
+- `loop-rule-reviewer`: independently review the fix against the root cause, expected behavior, scope, regression evidence, and risk.
+
+For every normal/risky fix, delegated `loop-rule-reviewer` review is required before Done. For a tiny obvious fix, skip it only with a concrete reason. If a named custom agent is unavailable but subagents are supported, use a built-in `default` or `explorer` agent with the same bounded role and record the fallback. If no subagent facility exists, report the review gap instead of claiming delegated review passed. Do not run parallel writers on the same failure path.
+
 ## Loop
 
 1. Build the tightest red-capable verifier: deterministic, fast enough to repeat, and able to fail before the fix. If reproduction is impossible, bound the failure with the best available artifact and name the evidence gap.
@@ -55,7 +66,7 @@ Keep progress and final prose terse: remove filler, hedging, pleasantries, repea
 6. Apply the smallest cause-specific fix with Ponytail.
 7. Rerun the original scenario, focused regression evidence, and relevant build/typecheck/lint or integration checks.
 8. Remove temporary logs, probes, flags, and prototypes.
-9. Run Ponytail Review and a correctness review proportionate to data, permission, concurrency, performance, and regression risk. Fix blockers and rerun affected evidence.
+9. Run Ponytail Review, then delegate correctness review according to the Subagents contract. Fix blockers, rerun affected evidence, and re-review affected areas.
 10. Commit, push, open a PR, monitor CI, or deploy only when requested. If CI itself is the symptom, its focused rerun is verification, not optional delivery.
 
 ## Conditional Mode

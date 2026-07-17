@@ -22,6 +22,7 @@ Treat the repository copy as source and the installed copy as runtime by default
 
 - For normal authoring: edit `skills/<skill-name>/`, validate it, then install the validated folder.
 - When the user explicitly says the installed version is authoritative: compare it with the repository, copy only the requested skill, then validate again.
+- For loop skills: prefer `python3 scripts/install.py <skill-name>` so mapped custom agents and `$rtk-token-saver` are installed with the skill. The generic skill installer copies only the skill folder and does not install repository-level `.codex/agents/*.toml` files.
 - Never bulk-copy every installed skill into the repository.
 - Preserve unrelated work in both locations.
 
