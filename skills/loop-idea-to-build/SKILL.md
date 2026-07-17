@@ -1,77 +1,82 @@
 ---
 name: loop-idea-to-build
-description: "Use when the user has a rough product idea, customer PDF/spec, meeting notes, large epic, or non-technical business request and wants to turn it into an executable build path: domain model, business rules, architecture boundaries, vertical slices, unknowns, harness sensors, and a first implementation goal. Do not use for a small already-specified code change or for a direct bug symptom."
+description: "Use when the user has a rough product idea, customer document, meeting notes, large epic, or non-technical request and wants a clear, executable build path. Produces settled rules, acceptance evidence, vertical slices, and a Change To Done contract. Do not use for an already-specified change or a concrete failure symptom."
 ---
 
 # Idea To Build Loop
 
-Turn rough intent into a controlled build path: source facts, domain rules, vertical slices, evidence, and a first build goal.
+Move from rough intent to one executable change contract.
 
-## Strict Execution Contract
+## State Contract
 
-When this skill triggers, follow the gates below exactly. Do not silently skip a gate.
+- **Input:** an idea, document, notes, product gap, epic, or ambiguous business request.
+- **Output:** a settled first vertical slice with rules, boundaries, acceptance evidence, and verifier.
+- **Next state:** `Change To Done`. If the user only wants discussion, stop with the clarified model and open decisions.
+- **Not done:** unresolved decisions are hidden as implementation assumptions.
 
-Before planning outputs become implementation, before editing files, and before committing, pushing, or opening a PR, emit a short `Loop checkpoint` with:
+Conversation and analysis do not authorize edits. Implementation, commit, push, PR, deploy, destructive operations, credentials, and external writes require the user's request or approval appropriate to that action.
 
-- loop type and classification: tiny, normal, or large/risky
-- source facts, assumptions, unknowns, and decisions still needed
-- acceptance evidence or the reason it is not yet knowable
-- whether `$grill-with-docs` is required, completed, or explicitly skipped with a reason
-- whether the user is asking for conversation/refinement only or authorizing implementation
-- PR decision: not requested, ask later, or already requested
+## Optional Dependency
 
-Hard stops:
-
-- If the user says they are only discussing, refining, asking "what do you think", or asking for suggestions, do not implement. Explore, clarify, or ask the next question only.
-- For normal/large/risky product direction, domain, workflow, data, permission, lifecycle, or UX decisions, `$grill-with-docs` is mandatory before implementation planning is treated as settled. Ask one question at a time and wait for the user unless code/docs can answer that question directly.
-- Do not create implementation code until unresolved business decisions are named and either answered by evidence/user feedback or explicitly deferred out of scope.
-- Ask before opening a PR unless the user has already explicitly requested a PR.
-
-Final response must include a compact gate report: source facts/assumptions, acceptance evidence, build/lint if code changed, `$grill-with-docs` status, simplicity review status, correctness review status, PR/CI status, and residual risk.
-
-## Companion Skills
-
-At start, check whether companion skills are available in the session. If a step would use a missing companion, say `missing companion skill: $name; using inline fallback` once and continue. Treat missing companions as blocking only when no inline/tool fallback can satisfy the step.
-
-- Simplicity: `$ponytail`, `$ponytail-review`.
-- Token efficiency: `$rtk-token-saver` (optional; compact noisy shell output when RTK is installed and exact raw output is not required).
-- State/stall: `$loop-state-and-stall-guard` (optional; persist resumable loop state and detect repeated failed attempts).
-- Direction/domain: `$grill-with-docs` (external companion), `$domain-modeling`, `$prototype`.
-- Planning outputs: `$to-prd`, `$to-issues`, `$handoff`.
-- Delivery/sensors: `$improve-codebase-architecture`, `$github:gh-fix-ci`, relevant security skills.
+Before shell-heavy work, load and follow `$rtk-token-saver` when the skill and its external RTK CLI are available. It is an optional operational dependency, not a companion or embedded behavior. Use its current availability, fallback, fidelity, safety, and verification rules as the source of truth. If unavailable, continue with normal commands; do not install or configure RTK without explicit approval.
 
 ## Start
 
-1. Identify the input: idea, customer PDF/spec, notes, product gap, epic, or non-technical business request.
-2. Classify: tiny, normal, or large/risky. Use `references/loop-control.md` for normal/large work, extended loops, automation, subagents, recurring work, or hands-off execution.
-3. Run and report the solution discussion gate before planning normal/large/risky work: use `$grill-with-docs` to challenge product direction, domain language, source facts, business decisions, acceptance evidence, and the first build shape. For tiny work, skip this gate only after naming the skip reason in the `Loop checkpoint`.
-4. If targeting a codebase, read local guidance before planning: `AGENTS.md`, README, docs, architecture notes, scripts, test conventions, and existing flows.
-5. Load only needed references: `harness-contract.md` for sensors, `program-brief.md` for normal/large work, `loop-prompts.md` for prompts/review gates, and `self-review.md` before final completion.
+1. Read relevant user-provided sources. In a repository, also read local guidance and the smallest useful set of docs, architecture notes, tests, and existing flows.
+2. Separate facts, assumptions, contradictions, unknowns, and decisions.
+3. Classify the work:
+   - **tiny:** intent and first slice are already clear;
+   - **normal:** a few product or domain decisions remain;
+   - **risky:** auth, money, data ownership, destructive behavior, compliance, public contracts, or core workflow semantics are involved.
+4. For normal/risky ambiguity, use `references/batch-grill-me.md`. Do not interview when repository evidence can answer the question.
+5. For normal/risky work, keep the compact record in `references/program-brief.md`.
+
+## Built-in Operating Rules
+
+### Ponytail
+
+Understand the real flow, then choose the first option that works: delete the need, reuse existing code, use the standard library, use the native platform, use an installed dependency, solve it in one line, or write the minimum new code. Do not cut explicit rules, trust-boundary validation, security, accessibility, data-loss handling, or required evidence.
+
+### Ponytail Review
+
+Before declaring the slice ready, look only for removable complexity: `delete`, `stdlib`, `native`, `yagni`, or `shrink`. If none applies, record `Lean already. Ship.`
+
+### Caveman
+
+Keep progress and final prose terse: remove filler, hedging, pleasantries, repeated summaries, tool narration, decorative tables, emoji, and long raw logs. Fragments are fine. Preserve the user's language and preserve code, commands, API names, identifiers, and exact errors. Do not invent abbreviations or sacrifice clarity for security warnings, irreversible confirmations, ambiguity, or multi-step instructions.
 
 ## Loop
 
-1. Separate source facts from assumptions, contradictions, unknowns, and decisions needed.
-2. Extract actors, workflows, terms, rules, permissions, lifecycle states, integrations, data objects, and constraints.
-3. Define harness evidence: source checks, local tests/CLI, build/typecheck/lint, browser paths, CI, logs/traces, docs, customer artifacts, or optional external sensors.
-4. Use `$rtk-token-saver` for noisy terminal evidence when available; use raw output when exact diagnostics, traces, snapshots, or security detail matters.
-5. Record mode, state, objective verifier/acceptance evidence, hard stop, sensors, and human approval gates; use `$loop-state-and-stall-guard` for resumable/automated work.
-6. Apply the embedded Ponytail gate to planning: slice the smallest user-visible or system-verifiable program, reuse existing product/code/platform capability, and avoid speculative architecture. Never cut explicit customer rules, security, accessibility, data ownership, compliance, or required validation.
-7. Produce a brief rule catalog, glossary, vertical slices, and first phase goal.
-8. Self-review against source facts, assumptions, missing decisions, slice quality, and evidence.
-9. Run the simplicity review gate: use `$ponytail-review` when code/artifacts exist, otherwise inline-check for overbuilt scope, unnecessary abstraction, premature platform work, or larger-than-needed first slice.
-10. Run the correctness review gate: use `loop-rule-reviewer` for normal/large plans; inline fallback only after recording subagent discovery/fallback evidence.
-11. Fix blocking review findings or expose unresolved decisions.
-12. Create a concrete Codex goal only when the user asks for a goal or extended implementation loop.
-13. If code changes are produced, run the build/lint gate when available and record gaps/proxies.
-14. Ask before opening a PR unless already requested. After push/PR, monitor CI/CD when local pipeline coverage was incomplete and CI/CD exists, or record that CI/CD is unavailable/delegated.
-15. Update persistent state only for automated, recurring, multi-thread, or resumable loops; before repeating a failed gate, check the stall guard and change strategy if it triggers.
-16. Stop for user input before billing, authorization, legal/compliance, data ownership, or core workflow semantics are decided by guess.
-17. End with decision: done, continue, ask, escalate, or stop; include evidence, build/lint if code changed, `$grill-with-docs` status, simplicity review, correctness review, PR/CI status, state update, and open risks.
+1. Extract actors, workflows, terms, rules, permissions, lifecycle states, data objects, integrations, and constraints that matter to the first slice.
+2. Resolve only currently unblocked decisions. Use evidence first; use Batch Grill Me for the remaining decision frontier.
+3. Name acceptance evidence before architecture: examples, focused tests, CLI/API/browser checks, build/typecheck/lint, logs, customer artifacts, or another observable sensor.
+4. Design the smallest vertical slice that delivers a user-visible or system-verifiable outcome. Keep future slices out.
+5. Write the transition contract:
 
-## Subagents
+```text
+Objective:
+Actor and trigger:
+Expected behavior:
+Rejected behavior:
+Acceptance examples:
+Scope / out of scope:
+Verifier:
+Deferred decisions:
+```
 
-Use subagents only when they materially improve domain extraction, repo exploration, sensor inventory, slice planning, implementation, or independent review. Skip for tiny tasks and avoid parallel implementation until slice ownership is clear. Preferred agents: `loop-domain-extractor`, `explorer`, `loop-harness-sensor`, `loop-slice-planner`, `loop-rule-reviewer`, and `worker`. If unavailable, record the blocker and execute the role inline without pretending a separate review happened.
+6. Run Ponytail Review and a correctness review against the source facts, rules, permissions, edge cases, and acceptance evidence. Fix blocking findings.
+7. If implementation was requested, transition into Change To Done and execute the contract. Otherwise, return the contract and stop.
+
+## Conditional Modes
+
+- Use `references/loop-state-and-stall-guard.md` only for resumable, automated, multi-session, external-wait, or repeated-failure work.
+- `prototype`: build a throwaway executable only when behavior cannot be settled cheaply in prose, examples, or existing code.
+- `to-prd`: reshape the settled model as a PRD only when requested.
+- `to-issues`: split settled slices into independently grabbable issues only when requested.
+- `handoff`: write a resumption packet only when the work must move or pause.
+
+These are built-in modes, not installed-skill dependencies.
 
 ## Done
 
-Done means: source facts, assumptions, and unknowns are separated; domain rules and slices are explicit enough for implementation; acceptance evidence is named; Ponytail/simplicity gate applied; self-review and review gates have no blocking findings; objective verifier or judgment gap is honest; build/lint and PR/CI are handled if code changed; state is updated if resumable; unresolved business decisions are named instead of hidden in code.
+Done means the first slice has settled rules, explicit boundaries, acceptance evidence, a verifier, and no hidden business decision. Report the outcome, evidence, deferred decisions, residual risk, and next state. Do not force implementation or delivery work that was not requested.

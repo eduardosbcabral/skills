@@ -1,60 +1,20 @@
 # Change Ledger
 
-Use this for normal or risky behavior changes.
-
-## Change Shape
+Use for normal/risky changes. Keep only fields that affect implementation or verification.
 
 ```text
-Change:
-Actor:
-Trigger:
-Condition:
-Expected outcome:
-Rejected outcome:
-Edge cases:
-Business source:
-Assumptions:
-Unknowns:
-Execution mode:
-Objective verifier:
-Hard stop:
-```
-
-## Acceptance Examples
-
-Prefer concrete examples over broad prose:
-
-```text
-Given:
-When:
-Then:
-Verification:
-```
-
-Include negative or boundary examples when the rule is about validation, authorization, money, state transitions, or data visibility.
-
-## Implementation Record
-
-```text
-Current behavior:
+Objective:
+Actor and trigger:
+Expected behavior:
+Rejected behavior:
+Edge/boundary examples:
+Source facts:
+Assumptions or deferred decisions:
+Scope / out of scope:
 Chosen implementation point:
-Files/modules touched:
+Objective verifier:
 Checks run:
-Simplicity gate:
-Build/lint gate:
-Review gate:
-PR decision:
-Post-push CI/CD:
-State location:
-Durable rule capture:
 Residual risk:
 ```
 
-## Review Gates
-
-Add explicit review or user confirmation before changing:
-
-- auth, permissions, tenant boundaries, or data visibility;
-- billing, invoices, payment state, subscriptions, or financial calculations;
-- migrations, destructive data operations, or irreversible workflows;
-- public API contracts or customer-facing business semantics.
+Require explicit user direction before guessing about money, auth, permissions, tenant/data ownership, destructive operations, migrations, security, or public business contracts.

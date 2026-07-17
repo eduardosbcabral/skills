@@ -1,0 +1,4 @@
+interface:
+  display_name: "My Skills"
+  short_description: "Find and maintain Eduardo skills repository"
+  default_prompt: "Use $my-skills to locate and work with my canonical skills repository."

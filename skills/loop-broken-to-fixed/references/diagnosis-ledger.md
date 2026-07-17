@@ -1,61 +1,25 @@
 # Diagnosis Ledger
 
-Use this for non-tiny failures, competing hypotheses, or risky fixes.
-
-## Capture
+Use for non-tiny failures, competing hypotheses, or risky fixes.
 
 ```text
-Symptom:
+Symptom and impact:
 Expected behavior:
-Actual behavior:
-Environment:
-Trigger/action:
-First seen:
-Impact:
-Available artifacts:
-Missing sensors:
-Execution mode:
-Objective verifier:
-Hard stop:
-```
+Environment and trigger:
+Artifacts and missing sensors:
+Red-capable verifier:
 
-## Hypotheses
-
-Track one hypothesis at a time:
-
-```text
-Hypothesis:
+Ranked hypothesis:
 Why plausible:
-Evidence for:
-Evidence against:
-Falsification step:
-Result:
-Decision: keep / discard / refine
-```
+Evidence for / against:
+Falsification step and result:
 
-## Fix Record
-
-```text
 Root cause:
-Change made:
-Why this is the smallest safe fix:
+Smallest safe fix:
+Original scenario evidence:
 Regression evidence:
-Checks run:
-Simplicity gate:
-Build/lint gate:
-Review gate:
-PR decision:
-Post-push CI/CD:
-State location:
+Other checks:
 Residual risk:
-Follow-up, if any:
 ```
 
-## Stop Conditions
-
-Stop and ask for user input when:
-
-- the issue cannot be reproduced and no useful artifact is available;
-- the next step requires production access, credentials, or destructive operations;
-- the likely fix changes data ownership, billing, auth, security, migrations, or public contracts;
-- evidence points to an external service or deployment state that cannot be inspected locally.
+Stop for missing production authority or credentials, destructive operations, uncertain security/data impact, or a fix that would redefine product behavior. Transition to the appropriate loop instead of guessing.

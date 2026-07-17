@@ -83,6 +83,7 @@ This repository is intended to stay public. Keep personal paths, private hostnam
 - `coolify-cli`
 - `loop-idea-to-build`
 - `loop-state-and-stall-guard`
+- `my-skills`
 - `my-vault`
 - `loop-change-to-done`
 - `rtk-token-saver`
@@ -90,12 +91,8 @@ This repository is intended to stay public. Keep personal paths, private hostnam
 - `saas-frontend-patterns`
 - `saas-project-bootstrap`
 
-## External Companion Skills
+## Loop Dependencies
 
-Some loop skills can use optional companion skills when they are installed locally. These are referenced by name but are not bundled here.
+The three loop skills are self-contained. Their product, change, diagnosis, grilling, simplicity, output-style, and stall-control behavior is bundled inside each loop.
 
-- `$grill-with-docs`: external third-party companion for grilling unclear requirements and capturing glossary/ADR decisions.
-
-## Optional External Tools
-
-- `rtk-token-saver` can use the external RTK CLI from `rtk-ai/rtk` when it is installed. The skill falls back to normal commands when RTK is unavailable or when exact raw output is needed.
+They can load the bundled `$rtk-token-saver` as an optional operational dependency before shell-heavy work. That skill uses the external RTK CLI from `rtk-ai/rtk` when available and falls back to normal commands when RTK is unavailable or exact raw output is required.
