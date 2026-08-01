@@ -91,4 +91,4 @@ This repository is intended to stay public. Keep personal paths, private hostnam
 
 The three loop skills bundle their product, change, diagnosis, grilling, simplicity, output-style, and stall-control behavior. They delegate bounded extraction, evidence, planning, diagnosis, implementation, and independent review to custom or built-in subagents.
 
-The repository installer adds each loop's mapped custom agents and the bundled `$rtk-token-saver` optional dependency. RTK uses the external CLI from `rtk-ai/rtk` when available and falls back to normal commands when RTK is unavailable or exact raw output is required.
+The repository installer adds each loop's mapped custom agents and the bundled `$rtk-token-saver` optional dependency. The mapped loop agents declare GPT-5.6-Luna at maximum reasoning while retaining their bounded roles and read-only boundaries; V1 can honor that pin directly, while V2 must not be used for these delegations when its routing fields are unavailable because it may inherit the parent model. RTK uses the external CLI from `rtk-ai/rtk` when available and falls back to normal commands when RTK is unavailable or exact raw output is required.

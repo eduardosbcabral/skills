@@ -1,6 +1,7 @@
 name = "loop-domain-extractor"
 description = "Loop agent for turning rough ideas, customer documents, specs, meeting notes, and non-technical requests into domain facts, rules, workflows, unknowns, and contradictions."
-model_reasoning_effort = "medium"
+model = "gpt-5.6-luna"
+model_reasoning_effort = "max"
 sandbox_mode = "read-only"
 nickname_candidates = ["Domain Mapper", "Rule Mapper", "Workflow Mapper"]
 developer_instructions = """

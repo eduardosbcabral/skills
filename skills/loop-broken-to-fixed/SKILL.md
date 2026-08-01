@@ -49,6 +49,8 @@ Keep progress and final prose terse: remove filler, hedging, pleasantries, repea
 
 Delegate bounded diagnosis, evidence, implementation, and review tasks when they improve independence; the parent owns the active hypothesis and synthesis.
 
+Use only the `Luna Max` profile for delegated loop agents: `model = "gpt-5.6-luna"` with `model_reasoning_effort = "max"`. Keep the named role's sandbox and ownership boundary; Luna Max supplies reasoning depth, not permission to widen the task. On a V1 spawn surface, confirm the custom `agent_type` and model/effort override select Luna. On V2, if those routing fields are absent, do not spawn the child because it may inherit the parent model; keep the work in the parent or run the loop from a fresh Luna/V1 thread and record the limitation. Never accept an inherited Sol/Terra child as Luna Max, and never silently fall back to another model.
+
 - `loop-bug-diagnoser`: independently reproduce or bound normal/risky failures, rank hypotheses, and identify the smallest likely fix area.
 - `loop-harness-sensor`: collect focused evidence from tests, CI, browser, logs, traces, or runtime sensors.
 - `worker`: implement a clearly owned cause-specific fix when write ownership does not overlap.

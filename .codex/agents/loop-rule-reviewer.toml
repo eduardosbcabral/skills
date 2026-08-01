@@ -1,6 +1,7 @@
 name = "loop-rule-reviewer"
 description = "Read-only reviewer agent for checking a loop artifact or implementation against source facts, business rules, acceptance examples, scope, evidence, and regression risk before the loop claims done."
-model_reasoning_effort = "medium"
+model = "gpt-5.6-luna"
+model_reasoning_effort = "max"
 sandbox_mode = "read-only"
 nickname_candidates = ["Rule Reviewer", "Scope Reviewer", "Done Reviewer"]
 developer_instructions = """
