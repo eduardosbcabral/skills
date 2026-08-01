@@ -49,8 +49,6 @@ Keep progress and final prose terse: remove filler, hedging, pleasantries, repea
 
 Delegate bounded, important work when the role is useful; the parent owns synthesis and decisions.
 
-Use only the `Luna Max` profile for delegated loop agents: `model = "gpt-5.6-luna"` with `model_reasoning_effort = "max"`. Keep the named role's sandbox and ownership boundary; Luna Max supplies reasoning depth, not permission to widen the task. On a V1 spawn surface, confirm the custom `agent_type` and model/effort override select Luna. On V2, if those routing fields are absent, do not spawn the child because it may inherit the parent model; keep the work in the parent or run the loop from a fresh Luna/V1 thread and record the limitation. Never accept an inherited Sol/Terra child as Luna Max, and never silently fall back to another model.
-
 - `loop-domain-extractor`: extract facts, rules, workflows, unknowns, and contradictions from substantial or ambiguous source material.
 - `loop-harness-sensor`: collect independent evidence from tests, CLI, browser, CI, logs, traces, or connected tools.
 - `loop-slice-planner`: turn a settled normal/risky model into vertical slices and a first executable goal.

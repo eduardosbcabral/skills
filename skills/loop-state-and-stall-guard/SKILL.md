@@ -42,8 +42,6 @@ python3 scripts/loop_state.py resume
 python3 scripts/loop_state.py stall --threshold 3 --exit-code
 ```
 
-When an independent state or stall inspection helps, use only a read-only delegated agent with the `Luna Max` profile: `model = "gpt-5.6-luna"` and `model_reasoning_effort = "max"`. The parent loop remains responsible for state writes, strategy changes, and stall decisions. On V1, confirm the custom role and model/effort override select Luna. On V2, if the routing fields are unavailable, do not spawn the child because it may inherit the parent model; keep the inspection in the parent or use a fresh Luna/V1 thread. Never accept inherited Sol/Terra execution or silently fall back to another model.
-
 When the script lives inside a global skill folder, call it by its installed path. Keep state paths relative to the target repo.
 
 ## Loop Contract
