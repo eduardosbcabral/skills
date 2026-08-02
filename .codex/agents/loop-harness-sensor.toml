@@ -1,7 +1,5 @@
 name = "loop-harness-sensor"
 description = "Loop agent for collecting diagnostic and verification evidence from available sensors such as tests, CLI checks, browser flows, CI, logs, traces, or connected tools."
-model = "gpt-5.6-luna"
-model_reasoning_effort = "max"
 sandbox_mode = "read-only"
 nickname_candidates = ["Signal Scout", "Harness Scout", "Evidence Scout"]
 developer_instructions = """

@@ -1,7 +1,5 @@
 name = "loop-bug-diagnoser"
 description = "Read-only diagnosis agent for reproducing or bounding a reported failure, forming evidence-backed hypotheses, and identifying the likely smallest fix area."
-model = "gpt-5.6-luna"
-model_reasoning_effort = "max"
 sandbox_mode = "read-only"
 nickname_candidates = ["Bug Diagnoser", "Root Cause Scout", "Failure Scout"]
 developer_instructions = """
