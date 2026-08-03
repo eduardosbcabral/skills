@@ -1,4 +1,4 @@
 interface:
   display_name: "Broken to Fixed Loop"
-  short_description: "Diagnose a symptom, fix it, and verify"
-  default_prompt: "Use $loop-broken-to-fixed to diagnose this failure, gather available sensors, implement the smallest fix, and verify it."
+  short_description: "Diagnose and fix a software failure"
+  default_prompt: "Use $loop-broken-to-fixed to diagnose this software failure, implement the smallest technical fix, and verify it."

@@ -1,6 +1,6 @@
 ---
 name: loop-idea-to-build
-description: "Use when the user has a rough product idea, customer document, meeting notes, large epic, or non-technical request and wants a clear, executable build path. Produces settled rules, acceptance evidence, vertical slices, and a Change To Done contract. Do not use for an already-specified change or a concrete failure symptom."
+description: "Use only when a rough software product, feature, integration, requirement, customer document, or technical epic needs a code-ready implementation path. Produces settled rules, acceptance evidence, vertical slices, and a Change To Done contract expected to lead to programming work. Do not use for vault or note organization, documentation-only synthesis, research, personal planning, content workflows, an already-scoped software change, or a concrete software failure."
 ---
 
 # Idea To Build Loop
@@ -9,10 +9,14 @@ Move from rough intent to one executable change contract.
 
 ## State Contract
 
-- **Input:** an idea, document, notes, product gap, epic, or ambiguous business request.
-- **Output:** a settled first vertical slice with rules, boundaries, acceptance evidence, and verifier.
+- **Input:** a software idea, requirement, source document, product gap, integration, or technical epic.
+- **Output:** a settled first software vertical slice with rules, boundaries, acceptance evidence, and verifier.
 - **Next state:** `Change To Done`. If the user only wants discussion, stop with the clarified model and open decisions.
 - **Not done:** unresolved decisions are hidden as implementation assumptions.
+
+## Programming Scope
+
+Use this loop only when the expected next state is implementation in code, tests, application configuration, or software infrastructure. A document or meeting note can be source material, but if the desired result is knowledge organization, prose, research, a vault change, personal planning, or an agent or skill edit, do not use this loop.
 
 Conversation and analysis do not authorize edits. Implementation, commit, push, PR, deploy, destructive operations, credentials, and external writes require the user's request or approval appropriate to that action.
 
@@ -44,6 +48,10 @@ Before declaring the slice ready, look only for removable complexity: `delete`, 
 ### Caveman
 
 Keep progress and final prose terse: remove filler, hedging, pleasantries, repeated summaries, tool narration, decorative tables, emoji, and long raw logs. Fragments are fine. Preserve the user's language and preserve code, commands, API names, identifiers, and exact errors. Do not invent abbreviations or sacrifice clarity for security warnings, irreversible confirmations, ambiguity, or multi-step instructions.
+
+## Durable Knowledge Handoff
+
+Before the final response, look for an available user or project knowledge skill whose own instructions grant current or standing authorization for its store. When one matches the task, invoke and follow it for the handoff. Hand off only verified durable rules, decisions, reusable diagnostics, runbooks, or stable context, and let that skill choose routing, privacy, and synchronization. This loop alone never authorizes an external write. Skip transient progress, raw logs, hypotheses, secrets, customer data, and material already preserved adequately in the source repository.
 
 ## Subagents
 
@@ -77,6 +85,7 @@ Deferred decisions:
 
 6. Run Ponytail Review, then delegate correctness review according to the Subagents contract. Fix blocking findings and re-review affected areas.
 7. If implementation was requested, transition into Change To Done and execute the contract. Otherwise, return the contract and stop.
+8. Before the final response, perform any authorized Durable Knowledge Handoff. If transitioning directly to Change To Done, let that loop perform the handoff once.
 
 ## Conditional Modes
 

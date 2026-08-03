@@ -1,22 +1,24 @@
 ---
 name: loop-state-and-stall-guard
-description: "Use as an optional companion for long, resumable, automated, repeated, or failure-prone engineering loops that need durable on-disk state, attempt journaling, resume context, and stall detection. Do not use for tiny one-shot tasks unless the user asks for resumability or the same verification failure repeats."
+description: "Use only as an optional companion to an active software-development loop when code, test, build, CI, deployment, runtime, or software-infrastructure work is long, resumable, automated, repeated, or failure-prone and needs durable state or stall detection. Do not use for notes or vault work, documentation-only tasks, research, personal organization, general monitoring, or tiny one-shot development tasks."
 metadata:
-  short-description: Persist loop state and detect repeated stalls
+  short-description: Persist software loop state and detect stalls
 ---
 
 # Loop State And Stall Guard
 
-Keep long loops from forgetting, restarting, or repeating the same failed approach. For tiny one-shot work, do nothing.
+Keep long software-development loops from forgetting, restarting, or repeating the same failed approach. It is not a standalone workflow. For non-programming work or tiny one-shot development work, do nothing.
 
 ## When To Use
 
-Use this only when one applies:
+Use this only when a software-development loop is already active and one applies:
 
-- The task is automated, scheduled, multi-thread, or explicitly resumable.
-- The task spans multiple iterations, PR/CI waits, external sensors, or a Codex goal.
+- The software task is automated, scheduled, multi-thread, or explicitly resumable.
+- The software task spans multiple implementation iterations, PR or CI waits, or external technical sensors.
 - A verifier fails repeatedly and the next attempt risks repeating the same approach.
-- The user asks to continue later or preserve the loop state.
+- The user asks to continue the software task later or preserve its loop state.
+
+Do not create `.agent-loop/` for vault organization, note capture, documentation-only edits, research, personal workflows, or general task tracking.
 
 ## State Location
 

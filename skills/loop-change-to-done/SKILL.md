@@ -1,6 +1,6 @@
 ---
 name: loop-change-to-done
-description: "Use when the user gives an already-scoped change, business rule, validation, permission, UI behavior, or implementation request and wants the smallest correct implementation with focused verification. Do not use for vague discovery or a task centered on a concrete failure symptom."
+description: "Use only for an already-scoped software-development change that requires editing executable code, tests, build or CI behavior, application configuration, or software infrastructure, and the user wants implementation plus verification. Do not use for notes or vault organization, documentation-only work, research, personal organization, skill or prompt maintenance, or discussion without a code-producing deliverable."
 ---
 
 # Change To Done Loop
@@ -9,10 +9,14 @@ Move from a specified change to a verified result.
 
 ## State Contract
 
-- **Input:** a scoped request or an Idea To Build transition contract.
-- **Output:** the smallest correct implementation plus focused evidence.
+- **Input:** a scoped software change or an Idea To Build transition contract.
+- **Output:** the smallest correct code, test, configuration, or software-infrastructure implementation plus focused evidence.
 - **Transition:** unclear product semantics go to `Idea To Build`; a failing verifier with an unknown cause goes to `Broken To Fixed`.
 - **Not done:** code exists but acceptance behavior or verification is unclear.
+
+## Programming Scope
+
+Use this loop only when the intended deliverable changes executable software or its development, test, build, deployment, or runtime behavior. Documents may be inputs or companion changes, but if the result is only prose, notes, vault structure, agent or skill instructions, research, or organization, do not use this loop.
 
 Conversation and analysis do not authorize edits. Implementation, commit, push, PR, deploy, destructive operations, credentials, and external writes require the user's request or approval appropriate to that action.
 
@@ -45,6 +49,10 @@ Use after implementation when the diff adds abstraction, spans several files, or
 
 Keep progress and final prose terse: remove filler, hedging, pleasantries, repeated summaries, tool narration, decorative tables, emoji, and long raw logs. Fragments are fine. Preserve the user's language and preserve code, commands, API names, identifiers, and exact errors. Do not invent abbreviations or sacrifice clarity for security warnings, irreversible confirmations, ambiguity, or multi-step instructions.
 
+## Durable Knowledge Handoff
+
+Before the final response, look for an available user or project knowledge skill whose own instructions grant current or standing authorization for its store. When one matches the task, invoke and follow it for the handoff. Hand off only verified durable rules, decisions, reusable diagnostics, runbooks, or stable context, and let that skill choose routing, privacy, and synchronization. This loop alone never authorizes an external write. Skip transient progress, raw logs, hypotheses, secrets, customer data, and material already preserved adequately in the source repository.
+
 ## Subagents
 
 Delegate bounded, important work when it improves independence or verification; the parent owns synthesis and final scope.
@@ -65,7 +73,8 @@ For every normal/risky code or behavior change, delegated `loop-rule-reviewer` r
 6. If a verifier fails for an unknown reason, transition to Broken To Fixed. If the implementation was wrong, correct it here and rerun only affected evidence.
 7. Run Ponytail Review when complexity warrants it, then delegate correctness review according to the Subagents contract. Fix blocking findings, rerun affected verification, and re-review affected areas.
 8. Capture durable rule documentation only when the behavior is business-significant and the repository has a clear home for it.
-9. Commit, push, open a PR, monitor CI, or deploy only when requested. A PR is an optional delivery action, not part of the definition of done.
+9. Perform any authorized Durable Knowledge Handoff.
+10. Commit, push, open a PR, monitor CI, or deploy only when requested. A PR is an optional delivery action, not part of the definition of done.
 
 ## Conditional Mode
 

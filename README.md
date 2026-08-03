@@ -68,6 +68,8 @@ Invoke a Claude Code skill directly with `/skill-name`, for example `/loop-chang
 
 This repository is intended to stay public. Keep personal paths, private hostnames, IP addresses, tokens, customer names, repository names, and environment-specific credentials out of these files. Use placeholders such as `<vault-name>`, `<project>`, `<host-alias>`, and `<timezone>` instead.
 
+User-specific note routing, private infrastructure, employer workflows, and personal skill-source policies belong in a private source and must not be added here.
+
 ## Included Skills
 
 - `azure-cli`
@@ -75,13 +77,10 @@ This repository is intended to stay public. Keep personal paths, private hostnam
 - `codex-remove-ui-noise`
 - `codex-report-usage`
 - `coolify-cli`
-- `create-wiki-notes`
 - `loop-broken-to-fixed`
 - `loop-change-to-done`
 - `loop-idea-to-build`
 - `loop-state-and-stall-guard`
-- `my-skills`
-- `my-wiki`
 - `rtk-token-saver`
 - `saas-backend-patterns`
 - `saas-frontend-patterns`

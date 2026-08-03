@@ -1,6 +1,6 @@
 ---
 name: loop-broken-to-fixed
-description: "Use when the user reports an exception, failed check, broken behavior, production error, performance regression, or another observable symptom and wants diagnosis through a verified cause-specific fix. Do not use for vague discovery or a specified feature with no failure symptom."
+description: "Use only when the user reports a software failure such as an exception, failing test, build or CI failure, broken runtime behavior, production error, or performance regression and wants a verified code, configuration, or software-infrastructure fix. Do not use for broken note links, vault organization, document correctness, research, personal workflows, or non-software troubleshooting."
 ---
 
 # Broken To Fixed Loop
@@ -9,10 +9,14 @@ Move from an observable failure to a verified root-cause fix.
 
 ## State Contract
 
-- **Input:** a symptom plus the expected behavior or an objective way to discover it.
-- **Output:** an evidence-backed cause, the smallest safe fix, and regression evidence.
+- **Input:** a software symptom plus the expected behavior or an objective way to discover it.
+- **Output:** an evidence-backed software cause, the smallest safe technical fix, and regression evidence.
 - **Transition:** unclear expected semantics go to `Idea To Build`; a discovered feature or rule change goes to `Change To Done`.
 - **Not done:** the named symptom disappeared but the cause, sibling paths, or regression risk remain unexplained.
+
+## Programming Scope
+
+Use this loop only when the symptom originates in executable software or its test, build, CI, deployment, runtime, configuration, or supporting infrastructure. Documentation may supply evidence, but a documentation-only repair, notes cleanup, vault problem, or general operational question is outside this loop.
 
 Conversation and diagnosis do not authorize edits. Implementation, commit, push, PR, deploy, destructive operations, credentials, and external writes require the user's request or approval appropriate to that action.
 
@@ -45,6 +49,10 @@ Review the fix only for removable complexity: `delete`, `stdlib`, `native`, `yag
 
 Keep progress and final prose terse: remove filler, hedging, pleasantries, repeated summaries, tool narration, decorative tables, emoji, and long raw logs. Fragments are fine. Preserve the user's language and preserve code, commands, API names, identifiers, and exact errors. Do not invent abbreviations or sacrifice clarity for security warnings, irreversible confirmations, ambiguity, or multi-step instructions.
 
+## Durable Knowledge Handoff
+
+Before the final response, look for an available user or project knowledge skill whose own instructions grant current or standing authorization for its store. When one matches the task, invoke and follow it for the handoff. Hand off only verified durable rules, decisions, reusable diagnostics, runbooks, or stable context, and let that skill choose routing, privacy, and synchronization. This loop alone never authorizes an external write. Skip transient progress, raw logs, hypotheses, secrets, customer data, and material already preserved adequately in the source repository.
+
 ## Subagents
 
 Delegate bounded diagnosis, evidence, implementation, and review tasks when they improve independence; the parent owns the active hypothesis and synthesis.
@@ -67,7 +75,8 @@ For every normal/risky fix, delegated `loop-rule-reviewer` review is required be
 7. Rerun the original scenario, focused regression evidence, and relevant build/typecheck/lint or integration checks.
 8. Remove temporary logs, probes, flags, and prototypes.
 9. Run Ponytail Review, then delegate correctness review according to the Subagents contract. Fix blockers, rerun affected evidence, and re-review affected areas.
-10. Commit, push, open a PR, monitor CI, or deploy only when requested. If CI itself is the symptom, its focused rerun is verification, not optional delivery.
+10. Perform any authorized Durable Knowledge Handoff.
+11. Commit, push, open a PR, monitor CI, or deploy only when requested. If CI itself is the symptom, its focused rerun is verification, not optional delivery.
 
 ## Conditional Mode
 
