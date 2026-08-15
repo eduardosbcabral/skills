@@ -57,6 +57,12 @@ Require workers to return `STATUS`, `CHANGES`, `EVIDENCE`, and `GAPS`. Advisors 
 
 Choose the smallest correct change. Preserve concurrent edits and project conventions. A worker must stop when ownership conflicts, scope expands, or a material decision is missing. Treat worker reports as claims; the parent inspects the actual diff and evidence.
 
+## Simplicity
+
+When Ponytail is available, keep its active mode for code-changing work. Fold `$ponytail-review` into the existing final review only when the candidate adds an abstraction, dependency, wrapper, configuration surface, or avoidable file; do not create another stage.
+
+Keep `$ponytail-audit`, `$ponytail-debt`, `$ponytail-gain`, and `$ponytail-help` explicit-only.
+
 ## Output Economy
 
 Before a shell-heavy phase, load `$rtk-token-saver` once and probe as it directs. Pass exactly `RTK: enabled` when usable or `RTK: raw` otherwise in worker `CONSTRAINTS`. Continue raw without setup or retries.

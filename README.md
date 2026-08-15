@@ -53,13 +53,35 @@ Copy-Item -Path ".claude\agents\claude-loop-*.md" -Destination "$HOME\.claude\ag
 
 Invoke it with `/claude-loop-orchestration`, or let Claude load it from its description. Restart the Claude Code session after adding or editing subagent files.
 
+## Ponytail
+
+Install Ponytail from its official repository as a native plugin instead of copying its skills into this repository.
+
+Codex:
+
+```bash
+codex plugin marketplace add DietrichGebert/ponytail
+codex plugin add ponytail@ponytail
+```
+
+Start a new Codex session, open `/hooks`, and review and trust the Ponytail lifecycle hooks.
+
+Claude Code:
+
+```bash
+claude plugin marketplace add DietrichGebert/ponytail
+claude plugin install ponytail@ponytail
+```
+
+Start a new Claude Code session after installation. Once enabled, Ponytail uses its default `full` mode throughout code-changing work. The loops fold `ponytail-review` into their existing final review only when the change introduces complexity signals; audit, debt, gain, and help stay explicit-only.
+
 ## Orchestration
 
 Both variants detect whether work starts as an idea, scoped change, or failure. The primary session remains the parent, substantial bounded work goes to a worker, analytical decisions go to an advisor, verification is proportional, and normal or risky change sets receive a fresh final review.
 
 The Codex profiles pin their native models in `.codex/agents/`. The Claude profiles use Opus for read-only analysis and review, and Sonnet for bounded implementation. Model details stay out of the skills themselves.
 
-`rtk-token-saver` is the loop's only skill dependency. It detects the optional RTK CLI by capability and falls back to raw commands immediately. Installing the skill never installs or configures the CLI.
+`rtk-token-saver` is the loop's only bundled skill dependency. It detects the optional RTK CLI by capability and falls back to raw commands immediately. Installing the skill never installs or configures the CLI. Ponytail remains an external native plugin and follows its official upstream releases.
 
 ## Privacy
 
