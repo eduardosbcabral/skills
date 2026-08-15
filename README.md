@@ -18,7 +18,7 @@ Install all Codex skills:
 python3 scripts/install.py --all
 ```
 
-Install the orchestration loop and its agents:
+Install the orchestration loop, its agents, and the optional RTK guidance:
 
 ```bash
 python3 scripts/install.py loop-orchestration
@@ -39,7 +39,16 @@ Install the Claude-specific loop and its two subagents:
 ```bash
 mkdir -p ~/.claude/skills ~/.claude/agents
 cp -R .claude/skills/claude-loop-orchestration ~/.claude/skills/
+cp -R skills/rtk-token-saver ~/.claude/skills/
 cp .claude/agents/claude-loop-*.md ~/.claude/agents/
+```
+
+PowerShell:
+
+```powershell
+New-Item -ItemType Directory -Force -Path "$HOME\.claude\skills", "$HOME\.claude\agents"
+Copy-Item -Recurse -Path ".claude\skills\claude-loop-orchestration", "skills\rtk-token-saver" -Destination "$HOME\.claude\skills\"
+Copy-Item -Path ".claude\agents\claude-loop-*.md" -Destination "$HOME\.claude\agents\"
 ```
 
 Invoke it with `/claude-loop-orchestration`, or let Claude load it from its description. Restart the Claude Code session after adding or editing subagent files.
@@ -50,7 +59,7 @@ Both variants detect whether work starts as an idea, scoped change, or failure. 
 
 The Codex profiles pin their native models in `.codex/agents/`. The Claude profiles use Opus for read-only analysis and review, and Sonnet for bounded implementation. Model details stay out of the skills themselves.
 
-`rtk-token-saver` remains an independent optional skill. Installing a loop does not install or configure RTK.
+`rtk-token-saver` is the loop's only skill dependency. It detects the optional RTK CLI by capability and falls back to raw commands immediately. Installing the skill never installs or configures the CLI.
 
 ## Privacy
 

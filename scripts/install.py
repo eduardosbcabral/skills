@@ -19,6 +19,10 @@ LOOP_AGENTS = {
     "loop-orchestration": ("loop-advisor", "loop-worker"),
 }
 
+SKILL_DEPENDENCIES = {
+    "loop-orchestration": ("rtk-token-saver",),
+}
+
 
 def replace_tree(source: Path, target: Path) -> None:
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -79,7 +83,20 @@ def main() -> None:
     if missing:
         raise SystemExit(f"unknown skill: {missing[0]}")
 
-    install_names = list(dict.fromkeys(requested))
+    dependencies = [
+        dependency
+        for name in requested
+        for dependency in SKILL_DEPENDENCIES.get(name, ())
+    ]
+    install_names = list(dict.fromkeys([*requested, *dependencies]))
+
+    missing_dependencies = [
+        name
+        for name in install_names
+        if not (SOURCE_SKILLS / name / "SKILL.md").is_file()
+    ]
+    if missing_dependencies:
+        raise SystemExit(f"missing skill dependency: {missing_dependencies[0]}")
 
     agent_names = sorted(
         {agent for name in requested for agent in LOOP_AGENTS.get(name, ())}

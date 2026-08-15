@@ -57,6 +57,12 @@ Require workers to return `STATUS`, `CHANGES`, `EVIDENCE`, and `GAPS`. Advisors 
 
 Choose the smallest correct change. Preserve concurrent edits and project conventions. A worker must stop when ownership conflicts, scope expands, or a material decision is missing. Treat worker reports as claims; the parent inspects the actual diff and evidence.
 
+## Output Economy
+
+Before a shell-heavy phase, load `$rtk-token-saver` once and probe as it directs. Pass exactly `RTK: enabled` when usable or `RTK: raw` otherwise in worker `CONSTRAINTS`. Continue raw without setup or retries.
+
+RTK may compress command output; it never lowers the required evidence. Use raw output when exact details or delivery truth matter.
+
 ## Verify
 
 - Use the cheapest verifier that proves the changed behavior.
