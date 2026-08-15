@@ -1,0 +1,6 @@
+interface:
+  display_name: "Loop Orchestration"
+  short_description: "Drive software work through one adaptive loop"
+  default_prompt: "Use $loop-orchestration to drive this software task to an evidence-backed result."
+policy:
+  allow_implicit_invocation: true

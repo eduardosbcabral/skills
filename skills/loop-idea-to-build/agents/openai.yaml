@@ -1,4 +1,0 @@
-interface:
-  display_name: "Idea to Build Loop"
-  short_description: "Turn a software idea into a code-ready path"
-  default_prompt: "Use $loop-idea-to-build to turn this rough software idea or requirement into a code-ready implementation path."

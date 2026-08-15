@@ -16,21 +16,7 @@ SOURCE_AGENTS = ROOT / ".codex" / "agents"
 NAME_PATTERN = re.compile(r"^[a-z0-9-]+$")
 
 LOOP_AGENTS = {
-    "loop-idea-to-build": (
-        "loop-domain-extractor",
-        "loop-harness-sensor",
-        "loop-slice-planner",
-        "loop-rule-reviewer",
-    ),
-    "loop-change-to-done": (
-        "loop-harness-sensor",
-        "loop-rule-reviewer",
-    ),
-    "loop-broken-to-fixed": (
-        "loop-bug-diagnoser",
-        "loop-harness-sensor",
-        "loop-rule-reviewer",
-    ),
+    "loop-orchestration": ("loop-advisor", "loop-worker"),
 }
 
 
@@ -94,17 +80,10 @@ def main() -> None:
         raise SystemExit(f"unknown skill: {missing[0]}")
 
     install_names = list(dict.fromkeys(requested))
-    if any(name in LOOP_AGENTS for name in requested) and "rtk-token-saver" not in install_names:
-        install_names.append("rtk-token-saver")
 
     agent_names = sorted(
         {agent for name in requested for agent in LOOP_AGENTS.get(name, ())}
     )
-    missing_dependencies = [
-        name for name in install_names if not (SOURCE_SKILLS / name / "SKILL.md").is_file()
-    ]
-    if missing_dependencies:
-        raise SystemExit(f"missing skill dependency: {missing_dependencies[0]}")
     missing_agents = [
         name for name in agent_names if not (SOURCE_AGENTS / f"{name}.toml").is_file()
     ]

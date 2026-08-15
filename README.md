@@ -1,93 +1,71 @@
 # AI Agent Skills
 
-Reusable Codex skills and custom agents for development workflows.
+Public, reusable skills and custom agents for software-development workflows.
 
 ## Layout
 
-- `skills/`: installable skill folders.
-- `.codex/agents/`: custom Codex subagent definitions used by the loop skills.
-- `scripts/install.py`: installs skills together with their mapped subagents and optional skill dependencies.
+- `skills/`: Codex and cross-tool Agent Skills.
+- `.codex/agents/`: Codex custom-agent profiles.
+- `.claude/skills/`: Claude Code-specific skills.
+- `.claude/agents/`: Claude Code custom subagents.
+- `scripts/install.py`: installs Codex skills with mapped custom agents.
 
-## Install in Codex
+## Codex
 
-Codex discovers personal skills under `${CODEX_HOME:-~/.codex}/skills/` and project-scoped skills under `.agents/skills/`. Custom agents are separate: personal definitions live under `${CODEX_HOME:-~/.codex}/agents/` and project-scoped definitions under `.codex/agents/`.
-
-Install all skills from this repository for your user:
+Install all Codex skills:
 
 ```bash
-git clone https://github.com/eduardosbcabral/skills.git /tmp/eduardo-skills
-cd /tmp/eduardo-skills
 python3 scripts/install.py --all
 ```
 
-Install one loop skill with its mapped custom agents and `$rtk-token-saver` dependency:
+Install the orchestration loop and its agents:
 
 ```bash
-python3 scripts/install.py loop-change-to-done
+python3 scripts/install.py loop-orchestration
 ```
 
-Install repo-scoped skills instead of user-global skills:
+Install into one project instead of the user runtime:
 
 ```bash
-python3 scripts/install.py --project /path/to/workspace loop-change-to-done
+python3 scripts/install.py --project /path/to/workspace loop-orchestration
 ```
 
-The generic Codex skill installer copies only the requested skill folder. It does not follow references to this repository's `.codex/agents/` directory. Use `scripts/install.py` for loop skills when their custom agents should be installed automatically.
+Invoke it explicitly with `$loop-orchestration`, or let Codex load it when the request matches its description. Restart Codex after adding a new top-level skill or custom-agent file.
 
-Use a skill explicitly by mentioning it in the prompt, for example `$loop-change-to-done`. Codex may also invoke a skill automatically when the task matches the `description` in `SKILL.md`. If a newly copied skill does not appear, restart Codex.
+## Claude Code
 
-## Install in Claude Code
-
-Claude Code discovers skills from `~/.claude/skills/<skill-name>/SKILL.md` for personal skills and `.claude/skills/<skill-name>/SKILL.md` for project-scoped skills. The command name comes from the skill folder name, so `~/.claude/skills/loop-change-to-done/SKILL.md` is invoked as `/loop-change-to-done`.
-
-Install all skills for your user:
+Install the Claude-specific loop and its two subagents:
 
 ```bash
-git clone https://github.com/eduardosbcabral/skills.git /tmp/eduardo-skills
-mkdir -p ~/.claude/skills
-cp -R /tmp/eduardo-skills/skills/* ~/.claude/skills/
+mkdir -p ~/.claude/skills ~/.claude/agents
+cp -R .claude/skills/claude-loop-orchestration ~/.claude/skills/
+cp .claude/agents/claude-loop-*.md ~/.claude/agents/
 ```
 
-Install only one skill:
+Invoke it with `/claude-loop-orchestration`, or let Claude load it from its description. Restart the Claude Code session after adding or editing subagent files.
 
-```bash
-mkdir -p ~/.claude/skills
-cp -R skills/loop-change-to-done ~/.claude/skills/
-```
+## Orchestration
 
-Install repo-scoped skills instead of user-global skills:
+Both variants detect whether work starts as an idea, scoped change, or failure. The primary session remains the parent, substantial bounded work goes to a worker, analytical decisions go to an advisor, verification is proportional, and normal or risky change sets receive a fresh final review.
 
-```bash
-mkdir -p .claude/skills
-cp -R skills/loop-change-to-done .claude/skills/
-```
+The Codex profiles pin their native models in `.codex/agents/`. The Claude profiles use Opus for read-only analysis and review, and Sonnet for bounded implementation. Model details stay out of the skills themselves.
 
-Invoke a Claude Code skill directly with `/skill-name`, for example `/loop-change-to-done`. Claude Code can also load skills automatically from their description. Claude Code detects edits under existing watched skill directories, but restart Claude Code if you create a new top-level skills directory and the skill does not appear.
+`rtk-token-saver` remains an independent optional skill. Installing a loop does not install or configure RTK.
 
 ## Privacy
 
-This repository is intended to stay public. Keep personal paths, private hostnames, IP addresses, tokens, customer names, repository names, and environment-specific credentials out of these files. Use placeholders such as `<vault-name>`, `<project>`, `<host-alias>`, and `<timezone>` instead.
-
-User-specific note routing, private infrastructure, employer workflows, and personal skill-source policies belong in a private source and must not be added here.
+Keep this repository generic and public. Do not add personal paths, private hostnames, IP addresses, tokens, customer names, repository names, or environment-specific credentials. Use placeholders for examples. Private workflows belong in a private source.
 
 ## Included Skills
 
 - `azure-cli`
 - `azure-devops`
+- `claude-loop-orchestration` (Claude Code)
 - `codex-remove-ui-noise`
 - `codex-report-usage`
 - `coolify-cli`
-- `loop-broken-to-fixed`
-- `loop-change-to-done`
-- `loop-idea-to-build`
-- `loop-state-and-stall-guard`
+- `loop-orchestration`
 - `rtk-token-saver`
 - `saas-backend-patterns`
 - `saas-frontend-patterns`
 - `saas-project-bootstrap`
-
-## Loop Dependencies
-
-The three loop skills bundle their product, change, diagnosis, grilling, simplicity, output-style, and stall-control behavior. They delegate bounded extraction, evidence, planning, diagnosis, implementation, and independent review to custom or built-in subagents.
-
-The repository installer adds each loop's mapped custom agents and the bundled `$rtk-token-saver` optional dependency. RTK uses the external CLI from `rtk-ai/rtk` when available and falls back to normal commands when RTK is unavailable or exact raw output is required.
