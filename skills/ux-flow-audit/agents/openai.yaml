@@ -1,0 +1,7 @@
+interface:
+  display_name: "UX Flow Audit"
+  short_description: "Planeje e teste fluxos reais de UX"
+  default_prompt: "Use $ux-flow-audit para planejar e auditar os fluxos desta aplicação como um usuário real."
+
+policy:
+  allow_implicit_invocation: true
