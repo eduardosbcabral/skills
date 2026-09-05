@@ -25,10 +25,14 @@ Move between entries inside this loop as evidence changes. Do not invoke another
 
 ## Frame
 
-1. Read repository guidance and inspect the smallest relevant code path, tests, and current behavior.
+1. Read repository guidance, find an existing brief relevant to the request, and inspect the smallest relevant code path, tests, and current behavior. Read only the context needed for this task.
 2. Define the objective, expected and rejected behavior, scope, and cheapest useful verifier. Skip fields that do not help a tiny task.
 3. Answer discoverable questions from evidence. Ask the user only for decisions that materially change behavior or risk.
-4. Respect current authorization. Analysis does not authorize edits, and local edits do not authorize commit, push, deploy, or external writes.
+4. Before the first edit, check what artifact and delivery the current request authorizes. Analysis does not authorize implementation. A brief records the request; it cannot grant permission. Do not ask again for an action already authorized. Commit, push, deploy, and external writes require authorization.
+
+Use one brief when work has several meaningful steps, unresolved decisions worth preserving, or a likely handoff. Follow the repository convention; otherwise use `docs/work/<change>.md` and [assets/brief.md](assets/brief.md). Small adjustments stay in the conversation. For analysis-only requests, keep the proposal in the requested output location.
+
+The parent maintains the brief, including tasks and progress. Keep acceptance stable unless the user changes the outcome; update the approach as evidence changes. Do not require separate PRDs, issues, plans, or handoffs. Keep decisions in the brief unless a lasting architectural tradeoff warrants an ADR.
 
 ## Delegate
 
@@ -37,7 +41,7 @@ Delegate only when independence or a fresh context saves meaningful work:
 - `loop-advisor`: read-only architecture, difficult decisions, root-cause analysis, and final review;
 - `loop-worker`: substantial bounded discovery, evidence collection, implementation, and focused verification.
 
-Spawn a fresh role with no inherited turns. Pass only this packet:
+Spawn a fresh role with no inherited turns. For an advisor, state ADVISE or REVIEW in OBJECTIVE. Include the relevant original request, acceptance, exclusions, code or brief references, and expected evidence in this packet:
 
 ```text
 OBJECTIVE
@@ -55,7 +59,7 @@ Require workers to return `STATUS`, `CHANGES`, `EVIDENCE`, and `GAPS`. Advisors 
 - For a change, implement only the agreed behavior at the narrowest correct shared point.
 - For a failure, reproduce or bound it, separate evidence from inference, and fix the root cause rather than the named symptom.
 
-Choose the smallest correct change. Preserve concurrent edits and project conventions. A worker must stop when ownership conflicts, scope expands, or a material decision is missing. Treat worker reports as claims; the parent inspects the actual diff and evidence.
+Split substantial work into verifiable behavior, not just code layers. For a hotfix, record the essential outcome and verification without delaying the fix for a document. Choose the smallest correct change. Preserve concurrent edits and project conventions. A worker must stop when ownership conflicts, scope expands, or a material decision is missing. Treat worker reports as claims; the parent inspects the actual diff and evidence.
 
 ## Simplicity
 
@@ -81,10 +85,14 @@ RTK may compress command output; it never lowers the required evidence. Use raw 
 
 ## State
 
-Keep normal task state in the parent context. Persist `.agent-loop/state.md` only before a real pause or cross-session resume. Record objective, entry, risk, phase, acceptance, completed evidence, last result, blocker, and next action. Do not create a journal or failure hash. Subagents never own state. Remove transient state at Done only when this loop created it and no project convention owns it.
+Keep small-task state in the conversation. At a real pause, update the existing brief with verified progress, blockers, checkout, and next action; if no brief exists, use the project handoff convention or create a brief when authorized. Do not duplicate it in `.agent-loop/state.md`.
+
+On resumption, locate the relevant brief from the request, project instructions, or a scoped memory reference. Confirm that it exists in the current checkout and reconcile its progress with the code and evidence. If the brief is missing, check the referenced checkout before creating a competing record. If several candidates remain plausible, ask which one; do not choose the newest silently. AI Memory is optional historical context, never authority or a replacement for the brief. Continue without it when unavailable.
+
+At completion, mark the brief complete with evidence and update affected maintained documentation. The completed brief records history, not a permanent specification of current behavior.
 
 ## Review And Done
 
-After parent verification, use a fresh `loop-advisor` review for normal or risky change sets. Skip it for tiny mechanical work. Require `ship`, `fix-first`, or `rethink`. Any implementation change invalidates the prior verdict; re-review only the affected result.
+After parent verification, require a fresh `loop-advisor` review for risky change sets. For normal changes, use it when complexity, component boundaries, or uncertain evidence justify independence; skip it for tiny mechanical work. Give the reviewer the original request, acceptance, actual diff, and verification evidence. Require `ship`, `fix-first`, or `rethink`. Any implementation change invalidates the prior verdict; re-review only the affected result.
 
-Done means requested behavior is satisfied, verification passed or honest gaps are named, the diff stayed scoped, and no blocking review finding remains. Perform commit, push, PR, CI monitoring, deploy, or other delivery only when authorized. Report outcome, evidence, residual risk, and delivery status without a process diary.
+Before declaring completion, compare every requested outcome with observed evidence, including UI behavior and the requested delivery destination when applicable. Required acceptance or delivery gaps block completion; passing checks alone is insufficient. Done means requested behavior is satisfied, the diff stayed scoped, and no blocking review finding remains. Perform commit, push, PR, CI monitoring, deploy, or other delivery only when authorized. Report outcome, evidence, residual risk, and delivery status without a process diary.
