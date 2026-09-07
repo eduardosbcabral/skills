@@ -80,7 +80,7 @@ RTK may compress command output; it never lowers the required evidence. Use raw 
 
 Keep small-task state in the conversation. At a real pause, update the existing brief with verified progress, blockers, checkout, and next action; if no brief exists, use the project handoff convention or create a brief when authorized. Do not duplicate it in `.agent-loop/state.md`.
 
-On resumption, locate the relevant brief from the request, project instructions, or a scoped memory reference. Confirm that it exists in the current checkout and reconcile its progress with the code and evidence. If the brief is missing, check the referenced checkout before creating a competing record. If several candidates remain plausible, ask which one; do not choose the newest silently. AI Memory is optional historical context, never authority or a replacement for the brief. Continue without it when unavailable.
+On resumption, locate the relevant brief from the request or project instructions. Confirm that it exists in the current checkout and reconcile its progress with the code and evidence. If the brief is missing, check the referenced checkout before creating a competing record. If several candidates remain plausible, ask which one; do not choose the newest silently.
 
 At completion, mark the brief complete with evidence and update affected maintained documentation. The completed brief records history, not a permanent specification of current behavior.
 
